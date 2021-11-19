@@ -1,0 +1,19 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ENVIRONMENT_URL=http://localhost:3000 SCREENSHOTS_DIR=screenshots/ NO_HEADLESS=true node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright": "^1.13.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-icons": "^1.0.3",
+    "@radix-ui/react-toggle-group": "^0.0.10"
+  }
+}
