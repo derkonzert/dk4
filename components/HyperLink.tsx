@@ -14,7 +14,7 @@ export const HyperLink = styled("a", {
     },
     muted: {
       true: {
-        color: "$slate10",
+        color: "$slate11",
       },
     },
     active: {

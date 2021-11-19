@@ -36,8 +36,8 @@ export const {
       secondary: "$indigo8",
       primary: "$indigo9",
 
-      bg1: "$slate1",
-      bg2: "$slate2",
+      bg1: "$indigo1",
+      bg2: "$indigo2",
     },
     space: {
       1: "5px",

@@ -110,6 +110,7 @@ export function LikeButton({
   return (
     <LikeButtonStyled
       isLiked={isLiked}
+      title="Toggle event like"
       onClick={(e) => {
         // TODO: move button outside of link
         e.preventDefault();
