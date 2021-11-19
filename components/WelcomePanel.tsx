@@ -28,7 +28,7 @@ const WelcomeCard = styled("div", {
 });
 
 export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
-  const { t, formatDateLocalized } = useTranslation();
+  const { t } = useTranslation();
   const { events: latest5 } = useEvents("latest", latest5fromServer, 5);
   const { events: top5ThisWeek, mutate: mutateTop5ThisWeek } = useTop5ThisWeek(
     top5ThisWeekServer,
@@ -38,9 +38,7 @@ export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
   const now = new Date();
 
   return (
-    <Box
-      css={{ gridColumn: "1 / 4", background: "$indigo4", maxWidth: "100%" }}
-    >
+    <Box css={{ gridColumn: "1 / 4", background: "$bg1", maxWidth: "100%" }}>
       <Box
         css={{
           paddingTop: "$8",
@@ -109,11 +107,7 @@ export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
 
                 return (
                   <LinkToEventDialog key={evt.id} id={evt.id}>
-                    <CompactEventListItem
-                      as="a"
-                      isInPast={isInPast}
-                      title={evt.title}
-                    >
+                    <CompactEventListItem isInPast={isInPast} title={evt.title}>
                       <TypoText
                         css={{
                           whiteSpace: "nowrap",
@@ -123,10 +117,7 @@ export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
                           marginRight: "$2",
                         }}
                       >
-                        {evt.title}{" "}
-                        <TypoText css={{ opacity: 0.5 }} as="span">
-                          {formatDateLocalized(fromDate, "P")}
-                        </TypoText>
+                        {evt.title}
                       </TypoText>
 
                       <LikeButton
@@ -158,7 +149,6 @@ export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
                   <LinkToEventDialog key={evt.id} id={evt.id}>
                     <CompactEventListItem
                       color="indigo"
-                      as="a"
                       isInPast={isInPast}
                       title={evt.title}
                     >

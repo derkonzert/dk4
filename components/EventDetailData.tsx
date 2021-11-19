@@ -210,7 +210,6 @@ export const EventDetailData = ({
                   shallow
                 >
                   <CompactEventListItem
-                    as="a"
                     isInPast={isInPast}
                     title={childEvent.title}
                   >

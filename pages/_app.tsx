@@ -1,4 +1,5 @@
 import { IdProvider } from "@radix-ui/react-id";
+import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -12,6 +13,7 @@ import { SkipToContent, SKIP_TO_CONTENT_ID } from "../components/SkipToContent";
 import { getLocale } from "../lib/getLocale";
 import { TranslationContextProvider } from "../lib/TranslationContextProvider";
 import { UserContextProvider } from "../lib/UserContextProvider";
+import { defaultSeoConfig } from "../next-seo.config";
 import { darkTheme, globalCss, styled } from "../stitches.config";
 import { supabase } from "../utils/supabaseClient";
 
@@ -114,6 +116,7 @@ function MyApp({ Component, pageProps }) {
         <Root>
           <TranslationContextProvider<locales> translations={getLocale(locale)}>
             <UserContextProvider supabaseClient={supabase}>
+              <DefaultSeo {...defaultSeoConfig} />
               <Head>
                 <title>derkonzert</title>
               </Head>

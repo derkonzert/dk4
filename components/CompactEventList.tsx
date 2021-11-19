@@ -1,7 +1,7 @@
 import { styled } from "../stitches.config";
 import { LikeButton } from "./LikeButton";
 
-export const CompactEventList = styled("ol", {
+export const CompactEventList = styled("nav", {
   display: "flex",
   flexWrap: "wrap",
 
@@ -32,7 +32,7 @@ export const CompactEventList = styled("ol", {
   },
 });
 
-export const CompactEventListItem = styled("li", {
+export const CompactEventListItem = styled("a", {
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-start",

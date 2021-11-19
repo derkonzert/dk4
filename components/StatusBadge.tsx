@@ -23,7 +23,7 @@ export const StatusBadge = styled("div", {
         color: "$red2",
       },
       warning: {
-        background: "$red4",
+        background: "$red3",
         color: "$red11",
       },
     },
