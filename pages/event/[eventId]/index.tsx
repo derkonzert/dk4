@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import {
   eventDetailData,
   EventDetailData,
@@ -84,6 +85,7 @@ interface EventDetailPageOwnProps {
 const EventDetailPage = ({ event, childEvents }: EventDetailPageOwnProps) => {
   return (
     <SidebarPage>
+      <NextSeo title={event.title} />
       <TypoHeading as="h1" size="h1" css={{ marginTop: "$5" }}>
         {event.title}
       </TypoHeading>
