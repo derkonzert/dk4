@@ -1,9 +1,16 @@
-import { endOfWeek, format, startOfWeek, sub } from "date-fns";
+import {
+  differenceInDays,
+  endOfWeek,
+  format,
+  startOfWeek,
+  sub,
+} from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Nullable } from "typescript-nullable";
 import { sendMail } from "../../../email/sendMail";
 import { makeWeeklyEmail } from "../../../email/templates/weekly";
 import { definitions } from "../../../types/supabase";
+import { logtail } from "../../../utils/logtailServer";
 import { supabaseServiceClient } from "../../../utils/supabaseServiceClient";
 
 export default async function notifyWeekly(
@@ -15,6 +22,11 @@ export default async function notifyWeekly(
   const now = Date.now();
   const startDate = startOfWeek(now, { weekStartsOn: 1 });
   const endDate = endOfWeek(startDate, { weekStartsOn: 1 });
+
+  if (differenceInDays(now, startDate) !== 0) {
+    logtail.log("Weekly newsletter triggered during week");
+    return res.status(400).end();
+  }
 
   const emailIdentifierKey = `weekly-${format(now, "yyyy-MM-dd")}`;
 
@@ -35,7 +47,7 @@ export default async function notifyWeekly(
     .filter("fromDate", "lte", endDate.toISOString());
 
   if (error) {
-    console.error(error);
+    logtail.error("Events this week not fetchable", error);
 
     return res.status(500).end();
   }
@@ -47,13 +59,13 @@ export default async function notifyWeekly(
       .filter("created_at", "lte", startDate.toISOString());
 
   if (recentlyAddedError) {
-    console.error(recentlyAddedError);
+    logtail.error("Message", recentlyAddedError);
 
     return res.status(500).end();
   }
 
   if (Nullable.isNone(eventsThisWeek) || Nullable.isNone(recentlyAdded)) {
-    console.error("Error receiving data.");
+    logtail.error("Error receiving data.");
 
     return res.status(500).end();
   }
@@ -95,7 +107,7 @@ export default async function notifyWeekly(
 
     return res.status(200).end(createdEmail?.id.toString());
   } catch (err) {
-    console.error(err);
+    logtail.error("Events this week not fetchable", err);
     return res.status(500).end("Could not create mail");
   }
 }
