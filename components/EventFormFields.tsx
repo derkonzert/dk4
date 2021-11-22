@@ -1,4 +1,5 @@
 import { Cross1Icon } from "@radix-ui/react-icons";
+import React from "react";
 import { useTranslation } from "../lib/TranslationContextProvider";
 import { useLocations } from "../lib/useLocations";
 import { Button } from "./Button";

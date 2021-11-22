@@ -10,6 +10,7 @@ import { useLocations } from "../lib/useLocations";
 import { eventWithLocation } from "../types/supabaseManualEnhanced";
 import { fromEventUpdates } from "../utils/supabaseClient";
 import { Button } from "./Button";
+import { CheckboxHookForm } from "./CheckboxHookForm";
 import { DiffViewer } from "./DiffViewer";
 import {
   DescriptionField,
@@ -38,9 +39,11 @@ export function CreateEventUpdateForm({
   const { locationByName } = useLocations();
 
   const {
+    control,
     register,
     formState: { errors, dirtyFields },
     getValues,
+    setValue,
     watch,
     handleSubmit,
   } = useForm({
@@ -57,6 +60,7 @@ export function CreateEventUpdateForm({
       url: event.url,
       ticketPrice: event.ticketPrice,
       description: event.description,
+      canceled: event.canceled,
     },
   });
 
@@ -170,6 +174,21 @@ export function CreateEventUpdateForm({
           <UrlField register={register} />
           <TicketPriceField register={register} />
           <DescriptionField register={register} />
+
+          <Flex gap="2" justify="start" align="center" css={{ marginTop: 26 }}>
+            <CheckboxHookForm
+              name="canceled"
+              control={control}
+              setValue={setValue}
+            />
+            <Label htmlFor="canceled">
+              <strong>{t("updateEventForm.canceled.label")}</strong>
+              <br />
+              <TypoText color="muted">
+                {t("updateEventForm.canceled.description")}
+              </TypoText>
+            </Label>
+          </Flex>
 
           {/* <ChildEventsFieldset
                   register={register}

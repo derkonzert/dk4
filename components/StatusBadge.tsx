@@ -1,3 +1,5 @@
+import type * as Stitches from "@stitches/react";
+import { PropsWithChildren } from "react";
 import { styled } from "../stitches.config";
 import {
   Tooltip,
@@ -30,7 +32,16 @@ export const StatusBadge = styled("div", {
   },
 });
 
-export const StatusBadgeTooltip = ({ type, children, explanation }) => {
+export interface StatusBadgeTooltipOwnProps {
+  type?: Stitches.VariantProps<typeof StatusBadge>["type"];
+  explanation: string;
+}
+
+export const StatusBadgeTooltip = ({
+  type,
+  children,
+  explanation,
+}: PropsWithChildren<StatusBadgeTooltipOwnProps>) => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>

@@ -118,12 +118,13 @@ export interface paths {
           description?: parameters["rowFilter.event_list.description"];
           location_name?: parameters["rowFilter.event_list.location_name"];
           created_at?: parameters["rowFilter.event_list.created_at"];
-          ticketPrice?: parameters["rowFilter.event_list.ticketPrice"];
           parent_event?: parameters["rowFilter.event_list.parent_event"];
           verified?: parameters["rowFilter.event_list.verified"];
           legacyId?: parameters["rowFilter.event_list.legacyId"];
           child_events?: parameters["rowFilter.event_list.child_events"];
           title?: parameters["rowFilter.event_list.title"];
+          canceled?: parameters["rowFilter.event_list.canceled"];
+          ticketPrice?: parameters["rowFilter.event_list.ticketPrice"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -269,6 +270,7 @@ export interface paths {
           ticketPrice?: parameters["rowFilter.events.ticketPrice"];
           verified?: parameters["rowFilter.events.verified"];
           legacyId?: parameters["rowFilter.events.legacyId"];
+          canceled?: parameters["rowFilter.events.canceled"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -333,6 +335,7 @@ export interface paths {
           ticketPrice?: parameters["rowFilter.events.ticketPrice"];
           verified?: parameters["rowFilter.events.verified"];
           legacyId?: parameters["rowFilter.events.legacyId"];
+          canceled?: parameters["rowFilter.events.canceled"];
         };
         header: {
           /** Preference */
@@ -361,6 +364,7 @@ export interface paths {
           ticketPrice?: parameters["rowFilter.events.ticketPrice"];
           verified?: parameters["rowFilter.events.verified"];
           legacyId?: parameters["rowFilter.events.legacyId"];
+          canceled?: parameters["rowFilter.events.canceled"];
         };
         body: {
           /** events */
@@ -1134,7 +1138,6 @@ export interface definitions {
     description?: string;
     location_name?: string;
     created_at?: string;
-    ticketPrice?: string;
     /**
      * Note:
      * This is a Foreign Key to `events.id`.<fk table='events' column='id'/>
@@ -1144,6 +1147,8 @@ export interface definitions {
     legacyId?: string;
     child_events?: string;
     title?: string;
+    canceled?: boolean;
+    ticketPrice?: string;
   };
   event_updates: {
     /**
@@ -1191,6 +1196,7 @@ export interface definitions {
     ticketPrice?: string;
     verified: boolean;
     legacyId?: string;
+    canceled?: boolean;
   };
   feedback: {
     /**
@@ -1313,12 +1319,13 @@ export interface parameters {
   "rowFilter.event_list.description": string;
   "rowFilter.event_list.location_name": string;
   "rowFilter.event_list.created_at": string;
-  "rowFilter.event_list.ticketPrice": string;
   "rowFilter.event_list.parent_event": string;
   "rowFilter.event_list.verified": string;
   "rowFilter.event_list.legacyId": string;
   "rowFilter.event_list.child_events": string;
   "rowFilter.event_list.title": string;
+  "rowFilter.event_list.canceled": string;
+  "rowFilter.event_list.ticketPrice": string;
   /** event_updates */
   "body.event_updates": definitions["event_updates"];
   "rowFilter.event_updates.id": string;
@@ -1342,6 +1349,7 @@ export interface parameters {
   "rowFilter.events.ticketPrice": string;
   "rowFilter.events.verified": string;
   "rowFilter.events.legacyId": string;
+  "rowFilter.events.canceled": string;
   /** feedback */
   "body.feedback": definitions["feedback"];
   "rowFilter.feedback.id": string;
