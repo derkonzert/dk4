@@ -3,9 +3,14 @@ import { getCssText, globalCss, theme } from "../../stitches.config";
 export const global = globalCss({
   html: {
     height: "100%",
+
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
   },
   body: {
-    margin: 0,
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+    margin: "0 $3",
     fontFamily:
       '"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif',
     backgroundColor: theme.colors.indigo1.value,
