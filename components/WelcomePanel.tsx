@@ -111,7 +111,11 @@ export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
 
                 return (
                   <LinkToEventDialog key={evt.id} id={evt.id}>
-                    <CompactEventListItem isInPast={isInPast} title={evt.title}>
+                    <CompactEventListItem
+                      isInPast={isInPast}
+                      title={evt.title}
+                      isCanceled={evt.canceled}
+                    >
                       <TypoText
                         css={{
                           whiteSpace: "nowrap",

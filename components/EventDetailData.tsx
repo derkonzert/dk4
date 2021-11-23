@@ -225,6 +225,7 @@ export const EventDetailData = ({
                 >
                   <CompactEventListItem
                     isInPast={isInPast}
+                    isCanceled={event.canceled}
                     title={childEvent.title}
                   >
                     <TypoText
