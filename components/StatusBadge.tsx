@@ -21,8 +21,8 @@ export const StatusBadge = styled("div", {
   variants: {
     type: {
       danger: {
-        background: "$red10",
-        color: "$red2",
+        background: "$red11",
+        color: "$red1",
       },
       warning: {
         background: "$red3",
