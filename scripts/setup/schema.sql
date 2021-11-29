@@ -467,7 +467,7 @@ CREATE VIEW public.top_liked_week AS
     count(l.id) AS likes_count
    FROM (public.event_list e
      LEFT JOIN public.likes l ON ((l.event_id = e.id)))
-  WHERE ((e."fromDate" >= now()) AND (e."fromDate" <= (now() + '7 days'::interval)))
+  WHERE (e.canceled != true) AND ((e."fromDate" >= now()) AND (e."fromDate" <= (now() + '7 days'::interval)))
   GROUP BY e.id, e."fromDate", e.title, e.created_at
   ORDER BY (count(l.id)) DESC, e.created_at DESC;
 

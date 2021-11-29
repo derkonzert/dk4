@@ -43,6 +43,7 @@ export default async function notifyWeekly(
   const { data: eventsThisWeek, error } = await supabaseServiceClient
     .from<definitions["events"]>("events")
     .select("*")
+    .filter("canceled", "not.eq", true)
     .filter("fromDate", "gte", startDate.toISOString())
     .filter("fromDate", "lte", endDate.toISOString());
 
