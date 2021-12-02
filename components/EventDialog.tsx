@@ -33,7 +33,7 @@ export const EventDialog = ({ id, onDeleted, onError }) => {
 
   const fetchEvent = useCallback(async () => {
     const { data: event, error } = await fromEvents<eventWithChildEvents>()
-      .select("*, childEvents:events.parent_event(id,title,fromDate,toDate)")
+      .select("*, childEvents:events!parent_event(id,title,fromDate,toDate)")
       .match({ id })
       .single();
 
