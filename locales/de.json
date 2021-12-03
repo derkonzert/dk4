@@ -148,5 +148,10 @@
   "welcomePanel.latest.title": "Neueste Einträge",
   "welcomePanel.popular.title": "Diese Woche",
   "welcomePanel.readMore": "Mehr über derkonzert erfahren",
-  "welcomePanel.title": "Konzerte in München"
+  "welcomePanel.title": "Konzerte in München",
+  "youtubeSearch.choose": "Auswählen",
+  "youtubeSearch.moreResultsButton": "Zeige mehr",
+  "youtubeSearch.noResults.title": "Keine Ergebnisse",
+  "youtubeSearch.search.label": "Suche",
+  "youtubeSearch.search.placeholder": "Künstlerin / Band live"
 }

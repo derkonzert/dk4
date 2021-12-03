@@ -1,6 +1,6 @@
 import { Label } from "@radix-ui/react-label";
 import { format, parseISO } from "date-fns";
-import { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Nullable } from "typescript-nullable";
@@ -152,6 +152,8 @@ export function CreateEventUpdateForm({
     [event, locationByName, onChangesSubmitted]
   );
 
+  const title = watch("title");
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex gap="5" direction="column">
@@ -173,7 +175,7 @@ export function CreateEventUpdateForm({
         <Flex gap="3" direction="column">
           <UrlField register={register} />
           <TicketPriceField register={register} />
-          <DescriptionField register={register} />
+          <DescriptionField register={register} initialSearch={title} />
 
           <Flex gap="2" justify="start" align="center" css={{ marginTop: 26 }}>
             <CheckboxHookForm

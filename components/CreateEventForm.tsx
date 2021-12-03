@@ -1,6 +1,6 @@
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { add, format, startOfToday } from "date-fns";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Nullable } from "typescript-nullable";
 import { useTranslation } from "../lib/TranslationContextProvider";
@@ -95,6 +95,8 @@ export function CreateEventForm({
     formState: { errors, isSubmitting, isSubmitSuccessful, dirtyFields },
     setError,
     getValues,
+    setValue,
+    watch,
     handleSubmit,
     clearErrors,
     control,
@@ -222,6 +224,8 @@ export function CreateEventForm({
     }
   };
 
+  const title = watch("title");
+
   return (
     <FormBox data-test-id="create-event-form">
       <Form
@@ -293,7 +297,7 @@ export function CreateEventForm({
               <Flex gap="3" css={{ marginTop: "$5" }} direction="column">
                 <UrlField register={register} />
                 <TicketPriceField register={register} />
-                <DescriptionField register={register} />
+                <DescriptionField register={register} initialSearch={title} />
               </Flex>
             </CollapsibleContent>
           </CollapsibleRoot>
