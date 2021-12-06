@@ -1,11 +1,13 @@
-import { Cross1Icon } from "@radix-ui/react-icons";
+import { Cross1Icon, VideoIcon } from "@radix-ui/react-icons";
+import React, { useEffect, useRef } from "react";
 import { useTranslation } from "../lib/TranslationContextProvider";
 import { useLocations } from "../lib/useLocations";
-import { Button } from "./Button";
+import { Button, ButtonIcon } from "./Button";
 import { Flex } from "./Flex";
 import { FormFieldError } from "./FormFieldError";
 import { Input, InputWithAppendix, Textarea } from "./Input";
 import { Label } from "./Label";
+import { YoutubeSearchDialog } from "./YoutubeSearchDialog";
 
 export function TitleField({ register, errors }) {
   const { t } = useTranslation();
@@ -193,15 +195,43 @@ export function TicketPriceField({ register }) {
   );
 }
 
-export function DescriptionField({ register }) {
+export function DescriptionField({ register, initialSearch }) {
   const { t } = useTranslation();
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const registeredField = register("description");
+
+  const handleSuggestionChosen = (suggestion) => {
+    if (textareaRef.current) {
+      textareaRef.current.value =
+        `${textareaRef.current.value}\nhttps://youtube.com/watch?v=${suggestion.videoId}`.trim();
+    }
+  };
+
+  useEffect(() => {
+    registeredField.ref(textareaRef.current);
+  }, [registeredField]);
 
   return (
     <Flex gap="1" direction="column">
       <Label htmlFor="description">
         {t("createEventForm.description.label")} (optional)
       </Label>
-      <Textarea id="description" {...register("description")} />
+      <Textarea id="description" {...registeredField} ref={textareaRef} />
+      <Flex justify="end">
+        <YoutubeSearchDialog
+          initialSearch={initialSearch}
+          onSuggestionChosen={handleSuggestionChosen}
+        >
+          <Button size="small" variant="ghost" type="button">
+            <ButtonIcon position="left">
+              <VideoIcon />
+            </ButtonIcon>
+            Find Youtube Video
+          </Button>
+        </YoutubeSearchDialog>
+      </Flex>
     </Flex>
   );
 }

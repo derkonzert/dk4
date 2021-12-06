@@ -1,6 +1,6 @@
 import { Label } from "@radix-ui/react-label";
 import { format, parseISO } from "date-fns";
-import { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Nullable } from "typescript-nullable";
@@ -10,6 +10,7 @@ import { useLocations } from "../lib/useLocations";
 import { eventWithLocation } from "../types/supabaseManualEnhanced";
 import { fromEventUpdates } from "../utils/supabaseClient";
 import { Button } from "./Button";
+import { CheckboxHookForm } from "./CheckboxHookForm";
 import { DiffViewer } from "./DiffViewer";
 import {
   DescriptionField,
@@ -38,9 +39,11 @@ export function CreateEventUpdateForm({
   const { locationByName } = useLocations();
 
   const {
+    control,
     register,
     formState: { errors, dirtyFields },
     getValues,
+    setValue,
     watch,
     handleSubmit,
   } = useForm({
@@ -57,6 +60,7 @@ export function CreateEventUpdateForm({
       url: event.url,
       ticketPrice: event.ticketPrice,
       description: event.description,
+      canceled: event.canceled,
     },
   });
 
@@ -148,6 +152,8 @@ export function CreateEventUpdateForm({
     [event, locationByName, onChangesSubmitted]
   );
 
+  const title = watch("title");
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex gap="5" direction="column">
@@ -169,7 +175,22 @@ export function CreateEventUpdateForm({
         <Flex gap="3" direction="column">
           <UrlField register={register} />
           <TicketPriceField register={register} />
-          <DescriptionField register={register} />
+          <DescriptionField register={register} initialSearch={title} />
+
+          <Flex gap="2" justify="start" align="center" css={{ marginTop: 26 }}>
+            <CheckboxHookForm
+              name="canceled"
+              control={control}
+              setValue={setValue}
+            />
+            <Label htmlFor="canceled">
+              <strong>{t("updateEventForm.canceled.label")}</strong>
+              <br />
+              <TypoText color="muted">
+                {t("updateEventForm.canceled.description")}
+              </TypoText>
+            </Label>
+          </Flex>
 
           {/* <ChildEventsFieldset
                   register={register}

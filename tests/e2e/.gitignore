@@ -45,3 +45,5 @@ terraform.tfstate
 terraform.tfstate.backup
 
 screenshots/
+
+.env

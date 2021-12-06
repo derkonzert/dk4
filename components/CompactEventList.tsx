@@ -43,16 +43,14 @@ export const CompactEventListItem = styled("a", {
   paddingInline: "$2",
   paddingBlock: "$1",
 
+  textDecoration: "none",
+
   "& + &": {
     marginTop: "1px",
   },
 
   [`& ${LikeButton}`]: {
     marginLeft: "auto",
-  },
-
-  [`&:is(a)`]: {
-    textDecoration: "none",
   },
 
   variants: {
@@ -62,29 +60,28 @@ export const CompactEventListItem = styled("a", {
         backgroundColor: "$indigo3",
       },
     },
+    isCanceled: {
+      true: {
+        textDecoration: "line-through",
+      },
+    },
     color: {
       white: {
         color: "$indigo12",
         backgroundColor: "$indigo1",
 
-        [`&:is(a)`]: {
-          textDecoration: "none",
-          "&:hover": {
-            color: "$indigo9",
-            backgroundColor: "$indigo3",
-          },
+        "&:hover": {
+          color: "$indigo9",
+          backgroundColor: "$indigo3",
         },
       },
       indigo: {
         color: "$indigo1",
         backgroundColor: "$indigo9",
 
-        [`&:is(a)`]: {
-          textDecoration: "none",
-          "&:hover": {
-            color: "$indigo1",
-            backgroundColor: "$indigo10",
-          },
+        "&:hover": {
+          color: "$indigo1",
+          backgroundColor: "$indigo10",
         },
       },
     },

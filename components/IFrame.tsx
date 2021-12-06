@@ -1,3 +1,4 @@
+import { CSSProperties } from "@stitches/react";
 import React from "react";
 import { useShowEmbed } from "../lib/useShowEmbed";
 import { styled } from "../stitches.config";
@@ -48,12 +49,19 @@ const ShowEmbedWarning = styled("div", {
   textAlign: "center",
 });
 
-export const Iframe = ({ src, id }) => {
+export interface IframeOwnProps {
+  src: string;
+  id: string;
+  width?: CSSProperties["width"];
+  height?: CSSProperties["height"];
+}
+
+export const Iframe = ({ src, id, width, height }: IframeOwnProps) => {
   const hostname = getHostName(src);
   const [showEmbeded, setShowEmbeded] = useShowEmbed(hostname);
 
   return (
-    <Wrapper>
+    <Wrapper style={{ width, height }}>
       <Scaler>
         {showEmbeded ? (
           <Frame id={`iframe-${id}`} src={src} frameBorder="0" />

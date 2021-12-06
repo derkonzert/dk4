@@ -20,11 +20,15 @@ const WelcomeCard = styled("div", {
   paddingInline: "$4",
   width: "100%",
   flex: "1 0 auto",
-  maxWidth: 400,
+  maxWidth: 320,
   borderRadius: "$3",
   color: "$indigo12",
   backgroundColor: "$indigo1",
   boxShadow: "0 4px 10px -5px $colors$blackA7, 0 1px 22px 0px $colors$blackA5",
+
+  "@bp1": {
+    maxWidth: 480,
+  },
 });
 
 export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
@@ -107,7 +111,11 @@ export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
 
                 return (
                   <LinkToEventDialog key={evt.id} id={evt.id}>
-                    <CompactEventListItem isInPast={isInPast} title={evt.title}>
+                    <CompactEventListItem
+                      isInPast={isInPast}
+                      title={evt.title}
+                      isCanceled={evt.canceled}
+                    >
                       <TypoText
                         css={{
                           whiteSpace: "nowrap",

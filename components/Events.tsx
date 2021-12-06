@@ -93,16 +93,6 @@ const EventListItemLink = styled("a", {
   color: "$slate12",
   textDecoration: "none",
 
-  variants: {
-    selected: {
-      true: {
-        [`& ${EventTitle}`]: {
-          textDecoration: "underline",
-        },
-      },
-    },
-  },
-
   "&:hover": {
     color: "$primary",
 
@@ -114,6 +104,38 @@ const EventListItemLink = styled("a", {
       textDecoration: "underline",
     },
   },
+
+  variants: {
+    selected: {
+      true: {
+        [`& ${EventTitle}`]: {
+          textDecoration: "underline",
+        },
+      },
+    },
+
+    canceled: {
+      true: {
+        [`& ${EventTitle}`]: {
+          textDecoration: "line-through",
+        },
+        "&:hover": {
+          [`& ${EventTitle}`]: {
+            textDecoration: "line-through",
+          },
+        },
+      },
+    },
+  },
+  compoundVariants: [
+    {
+      canceled: true,
+      selected: true,
+      css: {
+        textDecoration: "line-through",
+      },
+    },
+  ],
 });
 
 type eventsProp = definitions["event_list"] & { id: string };
@@ -175,7 +197,11 @@ export function Events({
                     passHref
                     shallow
                   >
-                    <EventListItemLink selected={query.eventId === evt.id}>
+                    <EventListItemLink
+                      data-test-id="event-list-item"
+                      selected={query.eventId === evt.id}
+                      canceled={evt.canceled}
+                    >
                       <Flex direction="column">
                         <EventTitle data-test-id="event-title">
                           {evt.title}
@@ -183,6 +209,14 @@ export function Events({
                             score={2 + (index % 4)}
                             startChar={evt.title.substr(0, 1)}
                           /> */}
+                          {evt.canceled && (
+                            <StatusBadgeTooltip
+                              type="danger"
+                              explanation={t("badge.canceled.explanation")}
+                            >
+                              {t("badge.canceled")}
+                            </StatusBadgeTooltip>
+                          )}
                           {!evt.verified && (
                             <StatusBadgeTooltip
                               type="warning"

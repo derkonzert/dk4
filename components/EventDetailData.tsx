@@ -59,6 +59,7 @@ export type eventDetailData = Pick<
   | "location"
   | "ticketPrice"
   | "url"
+  | "canceled"
 > & { id: string };
 
 interface EventDetailDataOwnProps {
@@ -122,6 +123,19 @@ export const EventDetailData = ({
           }}
         >
           {t("badge.notVerified.explanation")}
+        </TypoText>
+      )}
+      {event.canceled && (
+        <TypoText
+          color="warning"
+          css={{
+            marginBlock: "$4",
+            padding: "$2",
+            borderRadius: "$2",
+            border: "1px solid $red6",
+          }}
+        >
+          {t("badge.canceled.explanation")}
         </TypoText>
       )}
 
@@ -211,6 +225,7 @@ export const EventDetailData = ({
                 >
                   <CompactEventListItem
                     isInPast={isInPast}
+                    isCanceled={event.canceled}
                     title={childEvent.title}
                   >
                     <TypoText

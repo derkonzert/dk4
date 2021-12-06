@@ -10,6 +10,7 @@ import {
   isLegacyEventSlug,
 } from "../../../lib/legacyEventSlut";
 import { definitions } from "../../../types/supabase";
+import { logtail } from "../../../utils/logtailServer";
 import { fromEvents, fromUpcomingEvents } from "../../../utils/supabaseClient";
 
 export async function getStaticPaths(context) {
@@ -31,20 +32,22 @@ export const getStaticProps = async ({ params }) => {
   if (isLegacyEventSlug(params.eventId)) {
     const legacyId = getEventShortIdFromLegacyEventSlug(params.eventId);
 
+    logtail.log(`Check for legacyId "${legacyId}"`);
+
     if (!legacyId) {
       return {
         notFound: true,
       };
     }
 
-    const { data: event } = await fromEvents<
-      eventDetailData & { legacyId: string }
-    >()
-      .select(`*`)
+    const { data: event } = await fromEvents<{ legacyId: string; id: string }>()
+      .select(`id`)
       .eq("legacyId", legacyId)
       .single();
 
     if (!event) {
+      logtail.warn(`No event found for legacyId "${legacyId}"`);
+
       return {
         notFound: true,
       };
