@@ -148,5 +148,10 @@
   "welcomePanel.latest.title": "Latest Entries",
   "welcomePanel.popular.title": "Most popular this week",
   "welcomePanel.readMore": "More about derkonzert",
-  "welcomePanel.title": "Events in Munich"
+  "welcomePanel.title": "Events in Munich",
+  "youtubeSearch.choose": "Choose",
+  "youtubeSearch.moreResultsButton": "More results",
+  "youtubeSearch.noResults.title": "No results",
+  "youtubeSearch.search.label": "Search",
+  "youtubeSearch.search.placeholder": "Artist / Band"
 }

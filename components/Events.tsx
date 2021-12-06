@@ -198,6 +198,7 @@ export function Events({
                     shallow
                   >
                     <EventListItemLink
+                      data-test-id="event-list-item"
                       selected={query.eventId === evt.id}
                       canceled={evt.canceled}
                     >
