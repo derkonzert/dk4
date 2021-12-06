@@ -96,7 +96,7 @@ export const EventDialog = ({ id, onDeleted, onError }) => {
     >
       <DialogOverlay />
       {event && (
-        <DialogContent>
+        <DialogContent data-test-id="event-dialog">
           {event.parent_event && ( // TODO: Fix this
             <LinkToEventDialog id={event.parent_event}>
               <HyperLink css={{ textDecoration: "none" }}>
@@ -104,7 +104,11 @@ export const EventDialog = ({ id, onDeleted, onError }) => {
               </HyperLink>
             </LinkToEventDialog>
           )}
-          <DialogTitle size="h1" as={TypoHeading}>
+          <DialogTitle
+            size="h1"
+            as={TypoHeading}
+            data-test-id="event-dialog-title"
+          >
             {event.title}
           </DialogTitle>
           {Nullable.isSome(event) && (
