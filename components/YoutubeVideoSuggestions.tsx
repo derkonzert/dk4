@@ -66,6 +66,10 @@ export function YoutubeVideoSuggestions({
   );
 
   const handleFetchMore = useCallback(() => {
+    if (!searchThrottled) {
+      return;
+    }
+
     const params = new URLSearchParams({
       q: searchThrottled,
       nextPageToken: nextPageToken ?? "",
@@ -93,6 +97,10 @@ export function YoutubeVideoSuggestions({
   }, [fetchVideoSuggestions, nextPageToken, searchThrottled]);
 
   useEffect(() => {
+    if (!searchThrottled) {
+      return;
+    }
+
     const params = new URLSearchParams({
       q: searchThrottled,
     });
