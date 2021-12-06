@@ -1,16 +1,20 @@
+
 variable "checkly_api_key" {}
+variable "checkly_account_id" {}
 
 terraform {
   required_providers {
     checkly = {
       source  = "checkly/checkly"
-      version = "0.8.1"
+      version = "1.3.0"
     }
   }
 }
 
+
 provider "checkly" {
   api_key = var.checkly_api_key
+  account_id = var.checkly_account_id
 }
 
 resource "checkly_check" "create-event" {
@@ -18,7 +22,7 @@ resource "checkly_check" "create-event" {
   type                      = "BROWSER"
   activated                 = true
   should_fail               = false
-  frequency                 = 60
+  frequency                 = 720
   double_check              = true
   ssl_check                 = false
   use_global_alert_settings = true
@@ -27,6 +31,32 @@ resource "checkly_check" "create-event" {
   ]
 
   script = file("${path.module}/tests/create-event.js")
+
+  group_id    = checkly_check_group.dk4-group.id
+  group_order = 0
+
+
+  #   alert_channel_subscription {
+  #     channel_id = checkly_alert_channel.alert-email.id
+  #     activated  = true
+  #   }
+
+}
+
+resource "checkly_check" "view-event" {
+  name                      = "View Event"
+  type                      = "BROWSER"
+  activated                 = true
+  should_fail               = false
+  frequency                 = 720
+  double_check              = true
+  ssl_check                 = false
+  use_global_alert_settings = true
+  locations = [
+    "eu-central-1"
+  ]
+
+  script = file("${path.module}/tests/view-event.js")
 
   group_id    = checkly_check_group.dk4-group.id
   group_order = 0
