@@ -15,11 +15,14 @@ const { chromium } = require("playwright");
   let thrownError;
 
   try {
-    const title = await page.textContent(
-      ':nth-match([data-test-id="event-title"], 1)'
+    const title = await page.getAttribute(
+      ':nth-match([data-test-id="event-list-item"], 1)',
+      "title"
     );
 
     await page.click(':nth-match([data-test-id="event-list-item"], 1)');
+
+    await page.screenshot({ path: screenshotDir + "after-event-click.png" });
 
     await page.waitForSelector(
       `[data-test-id="event-dialog"] :text("${title}")`
