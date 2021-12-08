@@ -199,11 +199,12 @@ export function Events({
                   >
                     <EventListItemLink
                       data-test-id="event-list-item"
+                      title={evt.title}
                       selected={query.eventId === evt.id}
                       canceled={evt.canceled}
                     >
                       <Flex direction="column">
-                        <EventTitle data-test-id="event-title">
+                        <EventTitle>
                           {evt.title}
                           {/* <EventScore
                             score={2 + (index % 4)}
