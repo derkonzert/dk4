@@ -27,7 +27,7 @@
     "@radix-ui/react-id": "0.1.1",
     "@radix-ui/react-label": "0.1.2",
     "@radix-ui/react-popover": "^0.1.2",
-    "@radix-ui/react-separator": "^0.1.1",
+    "@radix-ui/react-separator": "^0.1.2",
     "@radix-ui/react-slot": "^0.1.2",
     "@radix-ui/react-tabs": "0.1.2",
     "@radix-ui/react-toggle": "^0.1.1",
