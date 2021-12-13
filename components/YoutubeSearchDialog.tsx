@@ -10,6 +10,7 @@ import {
   DialogClose,
   DialogContent,
   DialogOverlay,
+  DialogPortal,
   DialogRoot,
   DialogTrigger,
 } from "./Dialog";
@@ -66,34 +67,36 @@ export const YoutubeSearchDialog = ({
         >
           {children}
         </DialogTrigger>
-        <DialogOverlay />
-        <DialogContent size="small">
-          <Flex gap="3" direction="column">
-            <TypoHeading size="h3">Find a video on youtube</TypoHeading>
-            <TypoText color="muted">
-              This helps others to get to know the kind of artist…
-            </TypoText>
-            <Flex gap="1" direction="column">
-              <Label htmlFor="title">{t("youtubeSearch.search.label")}</Label>
-              <Input
-                id="title"
-                placeholder={t("youtubeSearch.search.placeholder")}
-                value={search}
-                onChange={(e) => setSearch(e.currentTarget.value)}
-                type="text"
+        <DialogPortal>
+          <DialogOverlay />
+          <DialogContent size="small">
+            <Flex gap="3" direction="column">
+              <TypoHeading size="h3">Find a video on youtube</TypoHeading>
+              <TypoText color="muted">
+                This helps others to get to know the kind of artist…
+              </TypoText>
+              <Flex gap="1" direction="column">
+                <Label htmlFor="title">{t("youtubeSearch.search.label")}</Label>
+                <Input
+                  id="title"
+                  placeholder={t("youtubeSearch.search.placeholder")}
+                  value={search}
+                  onChange={(e) => setSearch(e.currentTarget.value)}
+                  type="text"
+                />
+              </Flex>
+
+              <YoutubeVideoSuggestions
+                search={search}
+                onSuggestionChosen={handleSuggestionChosen}
               />
             </Flex>
 
-            <YoutubeVideoSuggestions
-              search={search}
-              onSuggestionChosen={handleSuggestionChosen}
-            />
-          </Flex>
-
-          <DialogClose data-splitbee-event="Closed Youtube Search Dialog">
-            <Cross1Icon />
-          </DialogClose>
-        </DialogContent>
+            <DialogClose data-splitbee-event="Closed Youtube Search Dialog">
+              <Cross1Icon />
+            </DialogClose>
+          </DialogContent>
+        </DialogPortal>
       </DialogRoot>
     </>
   );

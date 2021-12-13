@@ -1,4 +1,3 @@
-import { IdProvider } from "@radix-ui/react-id";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
@@ -106,39 +105,37 @@ function MyApp({ Component, pageProps }) {
   const headerSecondRow = isEventListPage(asPath, query) ? "events" : "none";
 
   return (
-    <IdProvider>
-      <ThemeProvider
-        disableTransitionOnChange
-        attribute="class"
-        value={{ light: "light-theme", dark: darkTheme.toString() }}
-        defaultTheme="system"
-      >
-        <Root>
-          <TranslationContextProvider<locales> translations={getLocale(locale)}>
-            <UserContextProvider supabaseClient={supabase}>
-              <DefaultSeo {...defaultSeoConfig} />
-              <Head>
-                <title>derkonzert</title>
-              </Head>
+    <ThemeProvider
+      disableTransitionOnChange
+      attribute="class"
+      value={{ light: "light-theme", dark: darkTheme.toString() }}
+      defaultTheme="system"
+    >
+      <Root>
+        <TranslationContextProvider<locales> translations={getLocale(locale)}>
+          <UserContextProvider supabaseClient={supabase}>
+            <DefaultSeo {...defaultSeoConfig} />
+            <Head>
+              <title>derkonzert</title>
+            </Head>
 
-              <SkipToContent />
+            <SkipToContent />
 
-              {!isPlainPage && <Header secondRow={headerSecondRow} />}
+            {!isPlainPage && <Header secondRow={headerSecondRow} />}
 
-              <Main id={SKIP_TO_CONTENT_ID} withoutPadding={isPlainPage}>
-                <Component {...pageProps} />
-              </Main>
+            <Main id={SKIP_TO_CONTENT_ID} withoutPadding={isPlainPage}>
+              <Component {...pageProps} />
+            </Main>
 
-              {!isPlainPage && <Footer />}
+            {!isPlainPage && <Footer />}
 
-              <Toaster containerStyle={{ zIndex: 99999 }} />
+            <Toaster containerStyle={{ zIndex: 99999 }} />
 
-              {!isPlainPage && <CookieNotice />}
-            </UserContextProvider>
-          </TranslationContextProvider>
-        </Root>
-      </ThemeProvider>
-    </IdProvider>
+            {!isPlainPage && <CookieNotice />}
+          </UserContextProvider>
+        </TranslationContextProvider>
+      </Root>
+    </ThemeProvider>
   );
 }
 

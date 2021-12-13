@@ -28,6 +28,7 @@ export const DialogOverlay = styled(Dialog.Overlay, {
   right: 0,
   bottom: 0,
   left: 0,
+  zIndex: "$dialogOverlay",
   "@media (prefers-reduced-motion: no-preference)": {
     animation: `${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
   },
@@ -51,6 +52,8 @@ export const DialogContent = styled(Dialog.Content, {
   bottom: 0,
   left: 0,
   maxHeight: "calc(var(--vh, 1vh) * 85)",
+
+  zIndex: "$dialog",
 
   "@media (prefers-reduced-motion: no-preference)": {
     animation: `${contentShowMobile} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
@@ -146,3 +149,4 @@ export const DialogTitle = styled(Dialog.Title, {
 });
 export const DialogDescription = Dialog.Description;
 export const DialogTrigger = Dialog.Trigger;
+export const DialogPortal = Dialog.Portal;
