@@ -8,6 +8,7 @@ import {
   DialogClose,
   DialogContent,
   DialogOverlay,
+  DialogPortal,
   DialogRoot,
   DialogTrigger,
 } from "./Dialog";
@@ -53,22 +54,24 @@ export const CreateEventFormDialog = ({ children }) => {
         >
           {children}
         </DialogTrigger>
-        <DialogOverlay />
-        <DialogContent>
-          <DynamicCreateEventForm
-            onEventCreated={handleEventCreated}
-            onDirtyForm={(isDirty) => {
-              setIsFormDirty(isDirty);
-            }}
-            onRequestClose={handleForceClose}
-          />
-          <DialogClose
-            data-splitbee-event="Close Create Event Form"
-            data-test-id="create-event-close"
-          >
-            <Cross1Icon />
-          </DialogClose>
-        </DialogContent>
+        <DialogPortal>
+          <DialogOverlay />
+          <DialogContent>
+            <DynamicCreateEventForm
+              onEventCreated={handleEventCreated}
+              onDirtyForm={(isDirty) => {
+                setIsFormDirty(isDirty);
+              }}
+              onRequestClose={handleForceClose}
+            />
+            <DialogClose
+              data-splitbee-event="Close Create Event Form"
+              data-test-id="create-event-close"
+            >
+              <Cross1Icon />
+            </DialogClose>
+          </DialogContent>
+        </DialogPortal>
       </DialogRoot>
       <CloseWithUnsavedChangesDialog
         open={showAlert}

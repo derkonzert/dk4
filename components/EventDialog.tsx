@@ -10,6 +10,7 @@ import {
   DialogClose,
   DialogContent,
   DialogOverlay,
+  DialogPortal,
   DialogRoot,
   DialogTitle,
 } from "./Dialog";
@@ -94,42 +95,44 @@ export const EventDialog = ({ id, onDeleted, onError }) => {
         }
       }}
     >
-      <DialogOverlay />
-      {event && (
-        <DialogContent data-test-id="event-dialog">
-          {event.parent_event && ( // TODO: Fix this
-            <LinkToEventDialog id={event.parent_event}>
-              <HyperLink css={{ textDecoration: "none" }}>
-                <ArrowUpIcon /> {parentEvent ? parentEvent.title : ""}
-              </HyperLink>
-            </LinkToEventDialog>
-          )}
-          <DialogTitle
-            size="h1"
-            as={TypoHeading}
-            data-test-id="event-dialog-title"
-          >
-            {event.title}
-          </DialogTitle>
-          {Nullable.isSome(event) && (
-            <EventDetailData
-              event={event}
-              childEvents={event.childEvents}
-              onDeleted={() => {
-                onDeleted();
-                router.back();
-              }}
-              onVerified={() => {
-                fetchEvent();
-              }}
-            />
-          )}
+      <DialogPortal>
+        <DialogOverlay />
+        {event && (
+          <DialogContent data-test-id="event-dialog">
+            {event.parent_event && ( // TODO: Fix this
+              <LinkToEventDialog id={event.parent_event}>
+                <HyperLink css={{ textDecoration: "none" }}>
+                  <ArrowUpIcon /> {parentEvent ? parentEvent.title : ""}
+                </HyperLink>
+              </LinkToEventDialog>
+            )}
+            <DialogTitle
+              size="h1"
+              as={TypoHeading}
+              data-test-id="event-dialog-title"
+            >
+              {event.title}
+            </DialogTitle>
+            {Nullable.isSome(event) && (
+              <EventDetailData
+                event={event}
+                childEvents={event.childEvents}
+                onDeleted={() => {
+                  onDeleted();
+                  router.back();
+                }}
+                onVerified={() => {
+                  fetchEvent();
+                }}
+              />
+            )}
 
-          <DialogClose>
-            <Cross1Icon />
-          </DialogClose>
-        </DialogContent>
-      )}
+            <DialogClose>
+              <Cross1Icon />
+            </DialogClose>
+          </DialogContent>
+        )}
+      </DialogPortal>
     </DialogRoot>
   );
 };

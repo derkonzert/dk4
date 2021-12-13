@@ -85,6 +85,8 @@ export const {
         "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
     },
     zIndices: {
+      dialog: 4,
+      dialogOverlay: 3,
       skipNav: 2,
       header: 1,
     },
