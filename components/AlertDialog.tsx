@@ -16,6 +16,7 @@ const StyledOverlay = styled(AlertDialogPrimitive.Overlay, {
   backgroundColor: "$blackA8",
   position: "fixed",
   inset: 0,
+  zIndex: "$dialogOverlay",
   "@media (prefers-reduced-motion: no-preference)": {
     animation: `${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
   },
@@ -44,6 +45,7 @@ const StyledContent = styled(AlertDialogPrimitive.Content, {
   maxWidth: "500px",
   maxHeight: "85vh",
   padding: 25,
+  zIndex: "$dialog",
   "@media (prefers-reduced-motion: no-preference)": {
     animation: `${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
     willChange: "transform",
@@ -69,6 +71,7 @@ const StyledDescription = styled(AlertDialogPrimitive.Description, {
 export const AlertDialog = Root;
 export const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 export const AlertDialogContent = StyledContent;
+export const AlertDialogPortal = AlertDialogPrimitive.Portal;
 export const AlertDialogTitle = StyledTitle;
 export const AlertDialogDescription = StyledDescription;
 export const AlertDialogAction = AlertDialogPrimitive.Action;
