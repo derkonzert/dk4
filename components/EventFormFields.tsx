@@ -1,5 +1,6 @@
 import { Cross1Icon, VideoIcon } from "@radix-ui/react-icons";
 import React, { useEffect, useRef } from "react";
+import { UseFormRegister } from "react-hook-form";
 import { useTranslation } from "../lib/TranslationContextProvider";
 import { useLocations } from "../lib/useLocations";
 import { Button, ButtonIcon } from "./Button";
@@ -195,7 +196,15 @@ export function TicketPriceField({ register }) {
   );
 }
 
-export function DescriptionField({ register, initialSearch }) {
+export function DescriptionField<T>({
+  register,
+  initialSearch,
+  setDescription,
+}: {
+  register: UseFormRegister<any>;
+  initialSearch?: string;
+  setDescription: (description: string) => void;
+}) {
   const { t } = useTranslation();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -204,8 +213,9 @@ export function DescriptionField({ register, initialSearch }) {
 
   const handleSuggestionChosen = (suggestion) => {
     if (textareaRef.current) {
-      textareaRef.current.value =
-        `${textareaRef.current.value}\nhttps://youtube.com/watch?v=${suggestion.videoId}`.trim();
+      setDescription(
+        `${textareaRef.current.value}\nhttps://youtube.com/watch?v=${suggestion.videoId}`.trim()
+      );
     }
   };
 

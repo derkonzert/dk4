@@ -175,7 +175,16 @@ export function CreateEventUpdateForm({
         <Flex gap="3" direction="column">
           <UrlField register={register} />
           <TicketPriceField register={register} />
-          <DescriptionField register={register} initialSearch={title} />
+          <DescriptionField
+            setDescription={(description) =>
+              setValue("description", description, {
+                shouldTouch: true,
+                shouldDirty: true,
+              })
+            }
+            register={register}
+            initialSearch={title}
+          />
 
           <Flex gap="2" justify="start" align="center" css={{ marginTop: 26 }}>
             <CheckboxHookForm

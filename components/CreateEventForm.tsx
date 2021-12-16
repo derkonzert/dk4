@@ -297,7 +297,16 @@ export function CreateEventForm({
               <Flex gap="3" css={{ marginTop: "$5" }} direction="column">
                 <UrlField register={register} />
                 <TicketPriceField register={register} />
-                <DescriptionField register={register} initialSearch={title} />
+                <DescriptionField
+                  register={register}
+                  initialSearch={title}
+                  setDescription={(description) =>
+                    setValue("description", description, {
+                      shouldTouch: true,
+                      shouldDirty: true,
+                    })
+                  }
+                />
               </Flex>
             </CollapsibleContent>
           </CollapsibleRoot>
