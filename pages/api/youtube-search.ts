@@ -35,7 +35,6 @@ export default async function webcal(
       return res.status(503).end("Service unavailable");
     }
 
-    console.log(ytResponse.data);
     const items = ytResponse.data.items ?? [];
 
     const itemsWithReducedInfo = items.map(

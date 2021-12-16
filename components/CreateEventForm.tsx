@@ -1,5 +1,5 @@
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { add, format, startOfToday } from "date-fns";
+import { add, addHours, format, startOfToday } from "date-fns";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Nullable } from "typescript-nullable";
@@ -166,6 +166,22 @@ export function CreateEventForm({
     onDirtyForm?.(isSubmitSuccessful ? false : hasDirtyFields);
   }, [onDirtyForm, hasDirtyFields, isSubmitSuccessful]);
 
+  useEffect(() => {
+    const subscription = watch((data, { name }) => {
+      if (name === "fromDate") {
+        if (data.fromDate && !lastsMultipleDays) {
+          setValue(
+            "toDate",
+            // @ts-ignore
+            format(addHours(data.fromDate, 3), "yyyy-MM-dd'T'HH:mm")
+          );
+        }
+      }
+    });
+
+    return subscription.unsubscribe;
+  }, [lastsMultipleDays, setValue, watch]);
+
   const onSubmit = async (formData) => {
     let existingLocation = locationByName(formData.location);
 
@@ -277,15 +293,15 @@ export function CreateEventForm({
                 </Label>
               </Flex>
             </Flex>
-            {lastsMultipleDays && (
-              <ToDateField
-                visible={lastsMultipleDays}
-                required={lastsMultipleDays}
-                register={register}
-                errors={errors}
-                getFromDate={() => getValues().fromDate}
-              />
-            )}
+
+            <ToDateField
+              visible={lastsMultipleDays}
+              required={lastsMultipleDays}
+              register={register}
+              errors={errors}
+              getFromDate={() => getValues().fromDate}
+            />
+
             <LocationField register={register} errors={errors} />
           </Flex>
 
