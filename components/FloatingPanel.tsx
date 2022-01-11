@@ -1,5 +1,6 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { keyframes, styled } from "../stitches.config";
+import { ChromelessButton } from "./ChromelessButton";
 
 const floatIn = keyframes({
   "0%": {
@@ -33,22 +34,27 @@ export const FloatingPanelTabs = styled(Tabs.Root, {
 export const FloatingPanelList = styled(Tabs.List, {
   flexShrink: 0,
   display: "flex",
-  borderBottom: "1px solid $slate5",
+  borderBottom: "1px solid $indigo5",
+  backgroundColor: "$indigo1",
 });
 
-export const FloatingPanelTrigger = styled(Tabs.Trigger, {
+export const FloatingPanelTrigger = styled(Tabs.Trigger, ChromelessButton, {
   flex: "1 0 0px",
   textAlign: "center",
-  padding: "10px 20px",
-  color: "$slate11",
+  padding: "$4 $2",
+  color: "$indigo12",
+  fontWeight: "bold",
+  backgroundColor: "transparent",
+  border: "none",
   userSelect: "none",
 
   "&:hover": {
-    boxShadow: "inset 0 -1px 0 0 $colors$slate6, 0 1px 0 0 $colors$slate6",
+    boxShadow: "inset 0 -1px 0 0 $colors$indigo6, 0 1px 0 0 $colors$indigo6",
   },
 
   '&[data-state="active"]': {
-    color: "$slate12",
+    color: "$indigo9",
+    backgroundColor: "$indigo1",
     boxShadow: "inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor",
   },
 });

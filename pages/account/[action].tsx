@@ -68,18 +68,20 @@ const Index = () => {
       <FloatingPanel
         css={{ "@bp1": { maxWidth: 360, width: "100%" }, marginInline: "auto" }}
       >
-        <Box
-          as="h1"
-          css={{
-            fontSize: "$5",
-            marginTop: "$1",
-            marginBottom: "$4",
-            padding: "0",
-            textAlign: "center",
-          }}
-        >
-          {title}
-        </Box>
+        {!!title && (
+          <Box
+            as="h1"
+            css={{
+              fontSize: "$5",
+              marginTop: "$1",
+              marginBottom: "$4",
+              padding: "0",
+              textAlign: "center",
+            }}
+          >
+            {title}
+          </Box>
+        )}
         {action === "update-password" && (
           <Auth.UpdatePassword supabaseClient={supabase} />
         )}
