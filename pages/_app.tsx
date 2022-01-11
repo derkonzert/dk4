@@ -73,7 +73,7 @@ const Main = styled("main", {
 const eventListPaths = ["/", "/latest", "/favorites", "/archive"];
 const isEventListPage = (path, query) =>
   query.currentFilter !== undefined ||
-  eventListPaths.includes(path.replace(/#(.)*$/, ""));
+  eventListPaths.includes(path.replace(/[#\?](.)*$/, ""));
 
 function MyApp({ Component, pageProps }) {
   globalStyles();
