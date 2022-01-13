@@ -44,7 +44,7 @@
     "clipboardy": "^3.0.0",
     "date-fns": "^2.28.0",
     "gray-matter": "^4.0.3",
-    "ical-generator": "^3.1.1",
+    "ical-generator": "^3.2.0",
     "lodash.sortby": "^4.7.0",
     "nanoid": "^3.1.31",
     "next": "^12.0.7",
