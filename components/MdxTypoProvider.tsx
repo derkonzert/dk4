@@ -32,7 +32,7 @@ const A = ({ href, ...props }: StyledComponentProps<any>) => {
   return <HyperLink href={href} {...props} />;
 };
 
-const bindProps = (Component, element, props) =>
+const bindProps = (Component, element?: any, props: any = {}) =>
   function BoundComponent(ownPropes) {
     return <Component as={element} {...props} {...ownPropes} />;
   };
@@ -45,9 +45,9 @@ export const components = {
   h5: bindProps(Heading, "h5", { size: "h6" }),
   p: bindProps(Text, "p", { size: "copy" }),
   li: bindProps(Li, "li", { size: "copy" }),
-  a: A,
-  Button,
-  Box,
+  a: bindProps(A),
+  Button: bindProps(Button),
+  Box: bindProps(Box),
   CreateFeedbackForm,
 };
 
