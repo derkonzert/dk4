@@ -54,7 +54,7 @@
     "puppeteer-core": "^10.4.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-hook-form": "^7.27.1",
+    "react-hook-form": "^7.28.1",
     "react-hot-toast": "^2.2.0",
     "react-use": "^17.3.2",
     "react-viewport-height": "^1.1.3",
