@@ -12,12 +12,12 @@ export function generateCalendar(events: definitions["events"][]) {
     // domain: "derkonzert.de",
     prodId: { company: "derkonzert.de", product: "derkonzert" },
     name: "derkonzert calendar",
-    timezone: "UTC",
+
     ttl: 60 * 60 * 12,
   });
 
   cal.timezone({
-    name: "UTC",
+    name: "Europe/Berlin",
     generator: getVtimezoneComponent,
   });
 
@@ -43,19 +43,21 @@ export function generateCalendar(events: definitions["events"][]) {
 
   for (let event of events) {
     try {
-      cal.createEvent({
-        start: event.fromDate,
-        end: Nullable.maybe(
-          "",
-          (fromDate) => addHours(parseISO(fromDate), 3).toISOString(),
-          event.fromDate
-        ),
-        timestamp: new Date().toISOString(),
-        timezone: "UTC",
-        uid: event.id,
-        summary: createSummary(event),
-        description: createDescription(event),
-      } as ICalEventData);
+      if (event.fromDate) {
+        cal.createEvent({
+          start: event.fromDate,
+          end: Nullable.maybe(
+            addHours(parseISO(event.fromDate), 3).toISOString(),
+            (toDate) => addHours(parseISO(toDate), 3).toISOString(),
+            event.toDate
+          ),
+          timestamp: event.fromDate,
+          timezone: "Europe/Berlin",
+          uid: event.id,
+          summary: createSummary(event),
+          description: createDescription(event),
+        } as ICalEventData);
+      }
     } catch (err) {
       console.error(err);
     }
