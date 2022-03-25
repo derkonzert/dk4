@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format } from "date-fns-tz";
 import { definitions } from "../../types/supabase";
 import {
   button,
@@ -18,7 +18,7 @@ export function makeHtml(eventsThisWeek: events, recentlyAdded: events) {
   return mail(
     join(
       conditional(
-        eventsThisWeek,
+        !!eventsThisWeek.length,
         text("p", "Upcoming events this week:", "5", "slate10"),
         list(eventsThisWeek, (evtData) => event(evtData, "large"))
       ),
@@ -32,7 +32,11 @@ export function makeHtml(eventsThisWeek: events, recentlyAdded: events) {
       center(
         text(
           "p",
-          `W${format(Date.now(), "ww")}Y${format(Date.now(), "yyyy")}`,
+          `W${format(Date.now(), "ww", { timeZone: "Europe/Berlin" })}Y${format(
+            Date.now(),
+            "yyyy",
+            { timeZone: "Europe/Berlin" }
+          )}`,
           "4",
           "slate9"
         )

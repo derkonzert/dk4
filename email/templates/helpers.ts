@@ -1,4 +1,5 @@
-import { format, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
+import { format } from "date-fns-tz";
 import de from "date-fns/locale/de";
 import { Nullable } from "typescript-nullable";
 import { theme } from "../../stitches.config";
@@ -111,7 +112,10 @@ const parseAndFormat = (formatString) => {
     return Nullable.maybe(
       "Unknown Date",
       (dateString) =>
-        format(parseISO(dateString), formatString, { locale: de }),
+        format(parseISO(dateString), formatString, {
+          locale: de,
+          timeZone: "Europe/Berlin",
+        }),
       dateStringOrNull
     );
   };

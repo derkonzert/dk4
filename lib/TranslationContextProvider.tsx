@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format } from "date-fns-tz";
 import { useRouter } from "next/router";
 import { createContext, useCallback, useContext } from "react";
 import { dateFnsLocales } from "./dateFnsLocales";
@@ -12,7 +12,7 @@ interface TranslationContextType {
 const TranslationContext = createContext<TranslationContextType>({
   t: (string) => string,
   locale: "de",
-  formatDateLocalized: (date: Date, formatString: string) => "string",
+  formatDateLocalized: (_date: Date, _formatString: string) => "string",
 });
 
 export function TranslationContextProvider<T extends string>({
@@ -37,6 +37,7 @@ export function TranslationContextProvider<T extends string>({
     (date, formatString) =>
       format(date, formatString, {
         locale: dateFnsLocales[router.locale ?? "de"],
+        timeZone: "Europe/Berlin",
       }),
     [router.locale]
   );
