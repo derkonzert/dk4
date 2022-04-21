@@ -21,6 +21,7 @@ import { Separator } from "./Separator";
 import { TypoHeading, TypoText } from "./Typo";
 
 interface AccountFormData {
+  id: string;
   username?: string;
   avatar_url?: string;
   weekly_updates?: boolean;
@@ -109,13 +110,16 @@ export default function Account({ session }) {
             .from<AccountFormData>("profiles")
             .update(updates, {
               returning: "minimal", // Don't return the value after inserting
-            });
+            })
+            .eq("id", user?.id);
 
           if (error) {
             throw error;
           }
 
-          toast.success(t("profileForm.toast.success"));
+          toast.success(t("profileForm.toast.success"), {
+            id: "profile-form-success",
+          });
         } catch (error) {
           alert(error.message);
         } finally {
