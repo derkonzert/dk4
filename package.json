@@ -49,7 +49,7 @@
     "lodash.sortby": "^4.7.0",
     "nanoid": "^3.3.3",
     "next": "^12.1.5",
-    "next-mdx-remote": "^4.0.2",
+    "next-mdx-remote": "^4.0.3",
     "next-seo": "^5.4.0",
     "next-themes": "^0.1.1",
     "puppeteer-core": "^10.4.0",
