@@ -13,7 +13,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@babel/core": "^7.17.10",
+    "@babel/core": "^7.17.12",
     "@googleapis/youtube": "^4.2.0",
     "@logtail/node": "^0.1.10",
     "@mdx-js/react": "^2.1.1",
