@@ -67,7 +67,7 @@
   "devDependencies": {
     "@types/mdx-js__react": "^1.5.5",
     "@types/react": "^17.0.43",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-config-next": "12.1.6",
     "glob": "^7.2.0",
     "husky": "^7.0.4",
