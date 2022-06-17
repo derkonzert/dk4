@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.18.5",
-    "@googleapis/youtube": "^4.2.0",
+    "@googleapis/youtube": "^5.0.0",
     "@logtail/node": "^0.1.12",
     "@mdx-js/react": "^2.1.1",
     "@radix-ui/colors": "^0.1.8",
