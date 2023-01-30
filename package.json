@@ -72,7 +72,7 @@
     "glob": "^8.0.3",
     "husky": "^8.0.1",
     "lint-staged": "^12.4.3",
-    "next-sitemap": "^2.5.28",
+    "next-sitemap": "^3.1.48",
     "trim": ">=1.0.1",
     "typescript": "^4.7.3"
   }
