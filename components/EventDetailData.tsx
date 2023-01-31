@@ -90,6 +90,10 @@ export const EventDetailData = ({
   const from = Nullable.maybe(new Date(), (d) => new Date(d), event.fromDate);
   const to = event.toDate ? new Date(event.toDate) : null;
 
+  const allDatesAreOnSameDay = childEvents.every((childEvent) =>
+    isoDateIsSameDay(event.fromDate, childEvent.fromDate)
+  );
+
   return (
     <Flex direction="column" css={{ flexGrow: 1 }}>
       <Flex
@@ -233,7 +237,7 @@ export const EventDetailData = ({
                       css={{ marginRight: "$1" }}
                     >{`${childEvent.title}`}</TypoText>
                     <TypoText>
-                      {isoDateIsSameDay(event.fromDate, childEvent.fromDate)
+                      {allDatesAreOnSameDay
                         ? formatDateLocalized(
                             new Date(childEvent.fromDate),
                             "p"
