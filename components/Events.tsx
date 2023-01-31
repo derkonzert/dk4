@@ -1,7 +1,6 @@
 import { parseISO } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
 import { Nullable } from "typescript-nullable";
 import { isoDateIsSameDay } from "../lib/isoDateCompare";
 import { sortChildEvents } from "../lib/sortChildEvents";
@@ -67,7 +66,7 @@ const EventData = styled("div", {
 
 const ChildEvents = styled("ol", {
   display: "flex",
-  flexWrap: "nowrap",
+  flexWrap: "wrap",
   gap: "$1",
   color: "$primary",
   marginBottom: "0",
@@ -187,8 +186,6 @@ export function Events({
                   )
                 );
 
-                const showEllipsis = childEvents?.length > 5;
-
                 return (
                   <Link
                     key={evt.id}
@@ -246,12 +243,11 @@ export function Events({
                         </EventData>
                         {childEvents?.length > 0 && (
                           <ChildEvents>
-                            {childEvents.slice(0, 8).map((childEvent) => (
+                            {childEvents.map((childEvent) => (
                               <ChildEventItem key={childEvent.id}>
                                 {childEvent.title}
                               </ChildEventItem>
                             ))}
-                            {showEllipsis && <ChildEventItem>…</ChildEventItem>}
                           </ChildEvents>
                         )}
                       </Flex>
