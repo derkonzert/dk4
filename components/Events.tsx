@@ -16,7 +16,7 @@ import { TypoHeading } from "./Typo";
 
 const Wrapper = styled(Grid, {
   marginBlock: "$6",
-  gridTemplateRows: "min-width",
+  gridTemplateRows: "min-content",
 });
 
 const EventList = styled(Grid, {
