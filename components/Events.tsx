@@ -2,9 +2,9 @@ import { parseISO } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Nullable } from "typescript-nullable";
+import { useTranslation } from "../lib/TranslationContextProvider";
 import { isoDateIsSameDay } from "../lib/isoDateCompare";
 import { sortChildEvents } from "../lib/sortChildEvents";
-import { useTranslation } from "../lib/TranslationContextProvider";
 import { useGroupedEvents } from "../lib/useGroupedEvents";
 import { styled } from "../stitches.config";
 import { definitions } from "../types/supabase";
@@ -16,6 +16,7 @@ import { TypoHeading } from "./Typo";
 
 const Wrapper = styled(Grid, {
   marginBlock: "$6",
+  gridTemplateRows: "min-width",
 });
 
 const EventList = styled(Grid, {
