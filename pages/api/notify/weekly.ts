@@ -1,4 +1,5 @@
 import {
+  addWeeks,
   differenceInDays,
   endOfWeek,
   format,
@@ -45,7 +46,8 @@ export default async function notifyWeekly(
     .select("*")
     .filter("canceled", "not.eq", true)
     .filter("fromDate", "gte", startDate.toISOString())
-    .filter("fromDate", "lte", endDate.toISOString());
+    .filter("fromDate", "lte", endDate.toISOString())
+    .order("fromDate", { ascending: true });
 
   if (error) {
     logtail.error("Events this week not fetchable", error);
@@ -56,8 +58,16 @@ export default async function notifyWeekly(
     await supabaseServiceClient
       .from<definitions["events"]>("events")
       .select("*")
+      // Filter out events happening this week as they already are shown in "this week"s section
+      .filter(
+        "fromDate",
+        "gte",
+        addWeeks(startOfWeek(startDate), 1).toISOString()
+      )
+      // Filter for events added last week
       .filter("created_at", "gte", sub(startDate, { weeks: 1 }).toISOString())
-      .filter("created_at", "lte", startDate.toISOString());
+      .filter("created_at", "lte", startDate.toISOString())
+      .order("fromDate", { ascending: true });
 
   if (recentlyAddedError) {
     logtail.error("Message", recentlyAddedError);
