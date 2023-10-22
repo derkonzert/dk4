@@ -3,7 +3,7 @@ import { DotFilledIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "../lib/TranslationContextProvider";
 import { useUser } from "../lib/UserContextProvider";
@@ -91,14 +91,6 @@ const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, {
   paddingBlockEnd: "$1",
   fontSize: "$2",
 });
-// @ts-ignore
-const StyledTriggerItem = styled(DropdownMenuPrimitive.TriggerItem, {
-  '&[data-state="open"]': {
-    backgroundColor: "$indigo4",
-    color: "$indigo11",
-  },
-  ...itemStyles,
-});
 
 const StyledLabel = styled(DropdownMenuPrimitive.Label, {
   paddingLeft: 5,
@@ -136,7 +128,6 @@ export const DropdownMenuCheckboxItem = StyledCheckboxItem;
 export const DropdownMenuRadioGroup = StyledRadioGroup;
 export const DropdownMenuRadioItem = StyledRadioItem;
 export const DropdownMenuItemIndicator = StyledItemIndicator;
-export const DropdownMenuTriggerItem = StyledTriggerItem;
 export const DropdownMenuLabel = StyledLabel;
 export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuArrow = StyledArrow;
