@@ -12,6 +12,7 @@ import { sendMails } from "../../../email/sendMail";
 import { makeWeeklyEmail } from "../../../email/templates/weekly";
 import { logtail } from "../../../utils/logtailServer";
 import { supabaseServiceClient } from "../../../utils/supabaseServiceClient";
+import { isEndToEndEventTitle } from "../e2e-reset";
 
 export default async function notifyWeekly(
   req: NextApiRequest,
@@ -86,10 +87,16 @@ export default async function notifyWeekly(
     return res.status(500).end();
   }
 
-  if (eventsThisWeek?.length || recentlyAdded?.length) {
+  // Skip leftover e2e test events, e.g. when the e2e reset failed
+  const isRealEvent = ({ title }: { title: string | null }) =>
+    !isEndToEndEventTitle(title ?? undefined);
+  const eventsThisWeekFiltered = eventsThisWeek.filter(isRealEvent);
+  const recentlyAddedFiltered = recentlyAdded.filter(isRealEvent);
+
+  if (eventsThisWeekFiltered.length || recentlyAddedFiltered.length) {
     const { subject, html, text } = makeWeeklyEmail(
-      eventsThisWeek,
-      recentlyAdded
+      eventsThisWeekFiltered,
+      recentlyAddedFiltered
     );
 
     if (debug) {
