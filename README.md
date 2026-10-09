@@ -26,4 +26,4 @@ This is a side project of [@jkempff](https://github.com/jkempff) and is constant
 - [vercel](https://vercel.com/) for deployments
 - [checklyhq](https://www.checklyhq.com/) for continues end to end testing
 - [sendgrid](https://sendgrid.com/) for sending emails
-- [splitbee](https://splitbee.io/) for anonymous analytics
+- [vercel web analytics](https://vercel.com/docs/analytics) for anonymous analytics

@@ -27,14 +27,6 @@ module.exports = {
         source: "/webcal/:token.ics",
         destination: "/api/webcal?token=:token",
       },
-      {
-        source: "/bee.js",
-        destination: "https://cdn.splitbee.io/sb.js",
-      },
-      {
-        source: "/_hive/:slug",
-        destination: "https://hive.splitbee.io/:slug",
-      },
     ];
   },
 

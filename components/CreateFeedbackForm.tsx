@@ -155,7 +155,6 @@ export function CreateFeedbackForm({
               variant="primary"
               size="medium"
               css={{ flex: "0 0 auto", alignSelf: "flex-end" }}
-              data-splitbee-event="Submit Feedback Form"
               data-test-id="create-feedback-submit"
             >
               {t("createFeedbackForm.submit")}

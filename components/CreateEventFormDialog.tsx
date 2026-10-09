@@ -47,11 +47,7 @@ export const CreateEventFormDialog = ({ children }) => {
   return (
     <>
       <DialogRoot open={open} onOpenChange={handleOpenChange}>
-        <DialogTrigger
-          data-splitbee-event="Open Create Event Form"
-          data-test-id="create-event-floating-button"
-          asChild
-        >
+        <DialogTrigger data-test-id="create-event-floating-button" asChild>
           {children}
         </DialogTrigger>
         <DialogPortal>
@@ -64,10 +60,7 @@ export const CreateEventFormDialog = ({ children }) => {
               }}
               onRequestClose={handleForceClose}
             />
-            <DialogClose
-              data-splitbee-event="Close Create Event Form"
-              data-test-id="create-event-close"
-            >
+            <DialogClose data-test-id="create-event-close">
               <Cross1Icon />
             </DialogClose>
           </DialogContent>

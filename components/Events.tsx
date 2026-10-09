@@ -253,10 +253,7 @@ export function Events({
                           </ChildEvents>
                         )}
                       </Flex>
-                      <LikeButton
-                        eventId={evt.id}
-                        data-splitbee-event="Event Toggle Like"
-                      />
+                      <LikeButton eventId={evt.id} />
                     </EventListItemLink>
                   </Link>
                 );

@@ -61,12 +61,7 @@ export const YoutubeSearchDialog = ({
   return (
     <>
       <DialogRoot open={open} onOpenChange={handleOpenChange}>
-        <DialogTrigger
-          data-splitbee-event="Opened Youtube Search Dialog"
-          asChild
-        >
-          {children}
-        </DialogTrigger>
+        <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogPortal>
           <DialogOverlay />
           <DialogContent size="small">
@@ -92,7 +87,7 @@ export const YoutubeSearchDialog = ({
               />
             </Flex>
 
-            <DialogClose data-splitbee-event="Closed Youtube Search Dialog">
+            <DialogClose>
               <Cross1Icon />
             </DialogClose>
           </DialogContent>

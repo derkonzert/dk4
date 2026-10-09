@@ -118,7 +118,6 @@ export function LikeButton({
           onLikeChanged?.(!isLiked);
         });
       }}
-      data-splitbee-event="Event Toggle Like"
       {...props}
     >
       {isLiked ? (

@@ -344,7 +344,6 @@ export function CreateEventForm({
               type="submit"
               size="large"
               css={{ flex: "0 0 auto", alignSelf: "flex-start" }}
-              data-splitbee-event="Submit Create Event Form"
               data-test-id="create-event-submit"
             >
               {t("createEventForm.submit")}
