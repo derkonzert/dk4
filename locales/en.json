@@ -71,6 +71,7 @@
   "event.delete.dialog.title": "Are you absolutely sure?",
   "event.delete.success": "Event deleted successfully",
   "event.verify": "Verify event",
+  "event.verify.search": "Search event",
   "event.verify.success": "Event verified",
   "eventDetail.childEventsTitle": "Dates",
   "eventDetail.createUpdate.action": "Propose change",

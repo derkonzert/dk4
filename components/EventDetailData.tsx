@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from "@radix-ui/react-icons";
+import { ExternalLinkIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { isSameDay } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -90,6 +90,12 @@ export const EventDetailData = ({
   const from = Nullable.maybe(new Date(), (d) => new Date(d), event.fromDate);
   const to = event.toDate ? new Date(event.toDate) : null;
 
+  const verificationSearchUrl = `https://duckduckgo.com/?q=${encodeURIComponent(
+    [event.title, location?.name, formatDateLocalized(from, "dd.MM.yyyy")]
+      .filter(Boolean)
+      .join(" ")
+  )}`;
+
   const allDatesAreOnSameDay = childEvents.every((childEvent) =>
     isoDateIsSameDay(event.fromDate, childEvent.fromDate)
   );
@@ -147,6 +153,7 @@ export const EventDetailData = ({
         gap="2"
         align="center"
         justify="start"
+        wrap="wrap"
         css={{
           borderTop: "1px solid $slate5",
           borderBottom: "1px solid $slate5",
@@ -171,7 +178,12 @@ export const EventDetailData = ({
         <ShareButton size="small" />
 
         {hasRole("admin") && (
-          <Flex gap="4" css={{ marginLeft: "auto" }}>
+          <Flex
+            gap={{ "@initial": "2", "@bp1": "4" }}
+            direction={{ "@initial": "column", "@bp1": "row" }}
+            align={{ "@initial": "start", "@bp1": "center" }}
+            css={{ marginLeft: "auto" }}
+          >
             <EventDeleteLink
               id={event.id}
               onDeleted={() => {
@@ -179,12 +191,25 @@ export const EventDetailData = ({
               }}
             />
             {!event?.verified && (
-              <VerifyEventLinkLink
-                id={event.id}
-                onVerified={() => {
-                  onVerified?.(event.id);
-                }}
-              />
+              <>
+                <Button
+                  variant="ghost"
+                  size="small"
+                  as="a"
+                  href={verificationSearchUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ButtonIcon as={MagnifyingGlassIcon} position="left" />
+                  {t("event.verify.search")}
+                </Button>
+                <VerifyEventLinkLink
+                  id={event.id}
+                  onVerified={() => {
+                    onVerified?.(event.id);
+                  }}
+                />
+              </>
             )}
           </Flex>
         )}
