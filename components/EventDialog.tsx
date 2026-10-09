@@ -106,12 +106,10 @@ export const EventDialog = ({ id, onDeleted, onError }) => {
                 </HyperLink>
               </LinkToEventDialog>
             )}
-            <DialogTitle
-              size="h1"
-              as={TypoHeading}
-              data-test-id="event-dialog-title"
-            >
-              {event.title}
+            <DialogTitle asChild>
+              <TypoHeading size="h1" data-test-id="event-dialog-title">
+                {event.title}
+              </TypoHeading>
             </DialogTitle>
             {Nullable.isSome(event) && (
               <EventDetailData

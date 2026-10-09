@@ -21,7 +21,6 @@ export function ShareButton(props: ButtonProps) {
 
   return (
     <DialogRoot>
-      <DialogOverlay />
       <DialogTrigger asChild>
         <Button variant="ghost" {...props}>
           <ButtonIcon as={Share2Icon} position="left" />
@@ -29,6 +28,7 @@ export function ShareButton(props: ButtonProps) {
         </Button>
       </DialogTrigger>
       <DialogPortal>
+        <DialogOverlay />
         <DialogContent size="small" key={id + "-content"}>
           <DynamicShareContent />
           <DialogClose>

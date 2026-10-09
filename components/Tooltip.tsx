@@ -1,4 +1,5 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import React from "react";
 import { keyframes, styled } from "../stitches.config";
 
 const slideUpAndFade = keyframes({
@@ -48,6 +49,21 @@ export const TooltipArrow = styled(TooltipPrimitive.Arrow, {
   fill: "$slate1",
 });
 
-export const Tooltip = TooltipPrimitive.Root;
+export function Tooltip(props: TooltipPrimitive.TooltipProps) {
+  return (
+    <TooltipPrimitive.Provider>
+      <TooltipPrimitive.Root {...props} />
+    </TooltipPrimitive.Provider>
+  );
+}
 export const TooltipTrigger = TooltipPrimitive.Trigger;
-export const TooltipContent = StyledContent;
+export const TooltipContent = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<typeof StyledContent>
+>(function TooltipContent(props, ref) {
+  return (
+    <TooltipPrimitive.Portal>
+      <StyledContent {...props} ref={ref} />
+    </TooltipPrimitive.Portal>
+  );
+});

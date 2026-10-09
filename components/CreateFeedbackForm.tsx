@@ -103,7 +103,7 @@ export function CreateFeedbackForm({
           <TypoHeading size="h6">{t("createFeedbackForm.title")}</TypoHeading>
           {errors.global && (
             <FormFieldError role="alert">
-              {errors.global?.message || "Something went wrong."}
+              {(errors.global?.message as string) || "Something went wrong."}
             </FormFieldError>
           )}
           <Flex gap="2" direction="column">
