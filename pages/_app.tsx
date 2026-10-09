@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
@@ -135,6 +136,7 @@ function MyApp({ Component, pageProps }) {
           </UserContextProvider>
         </TranslationContextProvider>
       </Root>
+      <Analytics />
     </ThemeProvider>
   );
 }
