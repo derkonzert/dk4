@@ -1,6 +1,11 @@
 module.exports = {
   reactStrictMode: true,
 
+  // no next/image usage; disable the /_next/image optimizer endpoint
+  images: {
+    unoptimized: true,
+  },
+
   i18n: {
     locales: ["en", "de"],
     defaultLocale: "de",

@@ -2,6 +2,9 @@
   "name": "supabase-nextjs",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,7 +17,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.18.5",
-    "@googleapis/youtube": "^8.0.2",
+    "@googleapis/youtube": "^40.0.0",
     "@logtail/node": "^0.1.12",
     "@mdx-js/react": "^2.1.1",
     "@radix-ui/colors": "^0.1.8",
@@ -35,7 +38,7 @@
     "@radix-ui/react-toggle-group": "^0.1.5",
     "@radix-ui/react-tooltip": "^0.1.7",
     "@radix-ui/react-visually-hidden": "^0.1.4",
-    "@sendgrid/mail": "^7.7.0",
+    "@sendgrid/mail": "^8.1.6",
     "@stitches/react": "^1.2.8",
     "@supabase/supabase-js": "^1.35.3",
     "@touch4it/ical-timezones": "^1.9.0",
@@ -47,7 +50,7 @@
     "gray-matter": "^4.0.3",
     "ical-generator": "^3.4.3",
     "lodash.sortby": "^4.7.0",
-    "nanoid": "^4.0.2",
+    "nanoid": "^5.1.16",
     "next": "^12.1.6",
     "next-mdx-remote": "^4.4.1",
     "next-seo": "^5.4.0",
@@ -61,7 +64,7 @@
     "react-viewport-height": "^1.2.2",
     "swr": "^1.3.0",
     "typescript-nullable": "^0.6.0",
-    "uuid": "^8.3.2"
+    "uuid": "^14.0.2"
   },
   "// trim only because of security advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
   "devDependencies": {
@@ -71,7 +74,7 @@
     "eslint-config-next": "13.3.0",
     "glob": "^8.0.3",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.1",
+    "lint-staged": "^17.6.0",
     "next-sitemap": "^4.0.7",
     "trim": ">=1.0.1",
     "typescript": "^4.7.3"
