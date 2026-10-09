@@ -26,7 +26,7 @@ export const useEventUpdates = (
     isValidating,
   } = useSWR<Nullable<eventUpdateWithData[]>>(
     [eventId, "eventUpdates"],
-    eventsFetcher,
+    () => eventsFetcher(eventId),
     {
       fallbackData,
     }

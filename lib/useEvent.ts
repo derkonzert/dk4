@@ -26,9 +26,13 @@ export const useEvent = (
     error,
     mutate,
     isValidating,
-  } = useSWR<Nullable<eventWithLocation>>([id, "event_list"], eventFetcher, {
-    fallbackData,
-  });
+  } = useSWR<Nullable<eventWithLocation>>(
+    [id, "event_list"],
+    () => eventFetcher(id),
+    {
+      fallbackData,
+    }
+  );
 
   return { event, isValidating, mutate, error };
 };

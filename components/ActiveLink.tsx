@@ -14,7 +14,7 @@ const ActiveLink = ({
 }: PropsWithChildren<ActiveLinkOwnProps & LinkProps>) => {
   const { asPath, locale, query } = useRouter();
   const router = useRouter();
-  const child = Children.only(children) as ReactElement;
+  const child = Children.only(children) as ReactElement<{ active?: boolean }>;
 
   // pages/index.js will be matched via props.href
   // pages/about.js will be matched via props.href

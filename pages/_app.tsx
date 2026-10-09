@@ -4,7 +4,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import useVH from "react-viewport-height";
 import { CookieNotice } from "../components/CookieNotice";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -12,6 +11,7 @@ import { SkipToContent, SKIP_TO_CONTENT_ID } from "../components/SkipToContent";
 import { getLocale } from "../lib/getLocale";
 import { TranslationContextProvider } from "../lib/TranslationContextProvider";
 import { UserContextProvider } from "../lib/UserContextProvider";
+import { useViewportHeight } from "../lib/useViewportHeight";
 import { defaultSeoConfig } from "../next-seo.config";
 import { darkTheme, globalCss, styled } from "../stitches.config";
 import { supabase } from "../utils/supabaseClient";
@@ -77,7 +77,7 @@ const isEventListPage = (path, query) =>
 
 function MyApp({ Component, pageProps }) {
   globalStyles();
-  useVH();
+  useViewportHeight();
 
   const router = useRouter();
   const { locale, asPath, query } = router;

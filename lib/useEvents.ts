@@ -65,7 +65,13 @@ export const useEvents = (
     isValidating,
   } = useSWR<Nullable<fetchedEvent[]>>(
     [filter, limit, year, locationId, "events"],
-    eventsFetcher,
+    () =>
+      eventsFetcher(
+        filter,
+        limit ?? undefined,
+        year ?? undefined,
+        locationId ?? undefined
+      ),
     {
       fallbackData,
     }
@@ -95,9 +101,13 @@ export const useTop5ThisWeek = (
     error,
     mutate,
     isValidating,
-  } = useSWR<Nullable<Top5ThisWeek[]>>([limit, "events"], top5fetcher, {
-    fallbackData,
-  });
+  } = useSWR<Nullable<Top5ThisWeek[]>>(
+    [limit, "events"],
+    () => top5fetcher(limit),
+    {
+      fallbackData,
+    }
+  );
 
   return { events, mutate, isValidating, error };
 };

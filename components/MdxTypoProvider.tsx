@@ -1,6 +1,6 @@
 import { MDXProvider } from "@mdx-js/react";
-import { StyledComponentProps } from "@stitches/react/types/styled-component";
 import Link from "next/link";
+import { ComponentProps } from "react";
 import { styled } from "../stitches.config";
 import { Box } from "./Box";
 import { Button } from "./Button";
@@ -20,8 +20,8 @@ const Li = styled(TypoText, {
   marginBottom: "0.2em",
 });
 
-const A = ({ href, ...props }: StyledComponentProps<any>) => {
-  if (href.startsWith("/")) {
+const A = ({ href, ...props }: ComponentProps<typeof HyperLink>) => {
+  if (href?.startsWith("/")) {
     return (
       <Link href={href} passHref legacyBehavior>
         <HyperLink {...props} />
