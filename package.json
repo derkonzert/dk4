@@ -36,7 +36,6 @@
     "@radix-ui/react-toggle-group": "^1.1.20",
     "@radix-ui/react-tooltip": "^1.3.0",
     "@radix-ui/react-visually-hidden": "^1.2.12",
-    "@sendgrid/mail": "^8.1.6",
     "@stitches/react": "^1.2.8",
     "@supabase/supabase-js": "^2.117.3",
     "@touch4it/ical-timezones": "^1.9.0",
@@ -59,6 +58,7 @@
     "react-hook-form": "^7.89.0",
     "react-hot-toast": "^2.6.1",
     "react-use": "^17.6.1",
+    "resend": "^6.32.1",
     "swr": "^2.5.1",
     "typescript-nullable": "^0.6.0",
     "uuid": "^14.0.2"

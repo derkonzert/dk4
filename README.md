@@ -25,5 +25,5 @@ This is a side project of [@jkempff](https://github.com/jkempff) and is constant
 - [supabase](https://supabase.io/) for database and api 💪
 - [vercel](https://vercel.com/) for deployments
 - [checklyhq](https://www.checklyhq.com/) for continues end to end testing
-- [sendgrid](https://sendgrid.com/) for sending emails
+- [resend](https://resend.com/) for sending emails
 - [vercel web analytics](https://vercel.com/docs/analytics) for anonymous analytics

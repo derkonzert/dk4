@@ -8,7 +8,7 @@ import {
 } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Nullable } from "typescript-nullable";
-import { sendMail } from "../../../email/sendMail";
+import { sendMails } from "../../../email/sendMail";
 import { makeWeeklyEmail } from "../../../email/templates/weekly";
 import { logtail } from "../../../utils/logtailServer";
 import { supabaseServiceClient } from "../../../utils/supabaseServiceClient";
@@ -105,11 +105,11 @@ export default async function notifyWeekly(
       .match({ weekly_updates: true });
 
     if (profiles) {
-      for (let profile of profiles) {
-        if (profile.email) {
-          await sendMail({ to: profile.email, html, text, subject });
-        }
-      }
+      await sendMails(
+        profiles.flatMap(({ email }) => (email ? [email] : [])),
+        { subject, html, text },
+        emailIdentifierKey
+      );
     }
   }
 

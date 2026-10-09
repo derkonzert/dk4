@@ -1,6 +1,6 @@
 import { startOfDay, sub } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
-import { sendMail } from "../../../email/sendMail";
+import { sendMails } from "../../../email/sendMail";
 import { makeEventEmail } from "../../../email/templates/new-event";
 import { logtail } from "../../../utils/logtailServer";
 import { supabaseServiceClient } from "../../../utils/supabaseServiceClient";
@@ -73,9 +73,11 @@ export default async function notifyEvent(
   logtail.log(`Send mail to ${profiles?.length ?? 0} users`);
 
   if (profiles) {
-    for (let profile of profiles) {
-      await sendMail({ to: profile.email, html, text, subject });
-    }
+    await sendMails(
+      profiles.map(({ email }) => email),
+      { subject, html, text },
+      emailIdentifierKey
+    );
   }
 
   try {

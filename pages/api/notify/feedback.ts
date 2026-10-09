@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { sendMail } from "../../../email/sendMail";
+import { sendMails } from "../../../email/sendMail";
 import { makeFeedbackEmail } from "../../../email/templates/new-feedback";
 import { definitions } from "../../../types/supabase";
 import { logtail } from "../../../utils/logtailServer";
@@ -54,9 +54,11 @@ export default async function notifyEvent(
   logtail.log(`Send mail to ${adminuserprofiles?.length ?? 0} users`);
 
   if (adminuserprofiles) {
-    for (let adminUser of adminuserprofiles) {
-      await sendMail({ to: adminUser.email, html, text, subject });
-    }
+    await sendMails(
+      adminuserprofiles.map(({ email }) => email),
+      { subject, html, text },
+      emailIdentifierKey
+    );
   }
 
   try {
