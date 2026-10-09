@@ -5,10 +5,6 @@ import { definitions } from "../../../types/supabase";
 import { logtail } from "../../../utils/logtailServer";
 import { supabaseServiceClient } from "../../../utils/supabaseServiceClient";
 
-type UserRoleWithEmail = {
-  user_id: { email: string };
-};
-
 export default async function notifyEvent(
   req: NextApiRequest,
   res: NextApiResponse
@@ -27,7 +23,7 @@ export default async function notifyEvent(
   const emailIdentifierKey = `feedback-${feedbackID}`;
 
   const { data: emailExists } = await supabaseServiceClient
-    .from<definitions["emails"]>("emails")
+    .from("emails")
     .select("id")
     .match({ key: emailIdentifierKey })
     .single();
@@ -47,13 +43,13 @@ export default async function notifyEvent(
   }
 
   const { data: adminusersIds } = await supabaseServiceClient
-    .from<UserRoleWithEmail>("user_roles")
+    .from("user_roles")
     .select("user_id")
     .match({ role: "admin" });
   const { data: adminuserprofiles } = await supabaseServiceClient
-    .from<definitions["profiles"]>("profiles")
+    .from("profiles")
     .select("email")
-    .match({ id: adminusersIds?.map(({ user_id }) => user_id) });
+    .in("id", adminusersIds?.map(({ user_id }) => user_id) ?? []);
 
   logtail.log(`Send mail to ${adminuserprofiles?.length ?? 0} users`);
 
@@ -65,10 +61,11 @@ export default async function notifyEvent(
 
   try {
     const { data: createdEmail } = await supabaseServiceClient
-      .from<definitions["emails"]>("emails")
+      .from("emails")
       .insert({
         key: emailIdentifierKey,
       })
+      .select("id")
       .single();
 
     logtail.log(`Done - All good`);

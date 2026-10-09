@@ -72,14 +72,9 @@ export function CreateFeedbackForm({
   }, [onDirtyForm, isDirty]);
 
   const onSubmit = async (formData) => {
-    const { error } = await fromFeedback().insert(
-      {
-        ...formData,
-      },
-      {
-        returning: "minimal",
-      }
-    );
+    const { error } = await fromFeedback().insert({
+      ...formData,
+    });
 
     if (!error) {
       onFeedbackCreated?.();
@@ -103,7 +98,7 @@ export function CreateFeedbackForm({
           <TypoHeading size="h6">{t("createFeedbackForm.title")}</TypoHeading>
           {errors.global && (
             <FormFieldError role="alert">
-              {errors.global?.message || "Something went wrong."}
+              {(errors.global?.message as string) || "Something went wrong."}
             </FormFieldError>
           )}
           <Flex gap="2" direction="column">

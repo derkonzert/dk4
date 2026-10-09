@@ -1,4 +1,5 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
+import React from "react";
 import { keyframes, styled } from "../stitches.config";
 
 const slideUpAndFade = keyframes({
@@ -68,6 +69,15 @@ const StyledClose = styled(PopoverPrimitive.Close, {
 // Exports
 export const Popover = PopoverPrimitive.Root;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
-export const PopoverContent = StyledContent;
+export const PopoverContent = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<typeof StyledContent>
+>(function PopoverContent(props, ref) {
+  return (
+    <PopoverPrimitive.Portal>
+      <StyledContent {...props} ref={ref} />
+    </PopoverPrimitive.Portal>
+  );
+});
 export const PopoverArrow = StyledArrow;
 export const PopoverClose = StyledClose;

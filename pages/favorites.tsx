@@ -75,11 +75,11 @@ const Favorites = ({
           css={{ marginTop: "$5", fontSize: "$5", fontFamily: "$heading" }}
         >
           <TypoText size="copy">
-            <Link href="/account/sign-in" passHref>
+            <Link href="/account/sign-in" passHref legacyBehavior>
               <HyperLink>Sign in</HyperLink>
             </Link>{" "}
             or{" "}
-            <Link href="/account/sign-up" passHref>
+            <Link href="/account/sign-up" passHref legacyBehavior>
               <HyperLink>create an account</HyperLink>
             </Link>{" "}
             to view your favorites.
@@ -87,7 +87,7 @@ const Favorites = ({
           <TypoText size="copy">
             Why would you bother and bother and create an account?
             <br />
-            <Link href="/about/features" passHref>
+            <Link href="/about/features" passHref legacyBehavior>
               <HyperLink>Learn about the features.</HyperLink>
             </Link>
           </TypoText>

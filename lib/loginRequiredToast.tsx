@@ -6,7 +6,7 @@ export function loginRequiredToast(t) {
   return toast((instance) => (
     <span>
       {t("toast.notLoggedIn")}{" "}
-      <Link href="/account/sign-in" passHref>
+      <Link href="/account/sign-in" passHref legacyBehavior>
         <HyperLink onClick={() => toast.dismiss(instance.id)}>
           {t("toast.notLoggedIn.link")}
         </HyperLink>

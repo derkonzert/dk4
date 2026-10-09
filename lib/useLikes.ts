@@ -11,7 +11,7 @@ import { useUser } from "./UserContextProvider";
 type fetchedLikes = Pick<definitions["likes"], "id" | "event_id">;
 
 export const likesFetcher = async () => {
-  const { data, error } = await fromLikes<fetchedLikes>()
+  const { data, error } = await fromLikes()
     .select("id,event_id")
     .order("id", { ascending: true });
 
@@ -59,13 +59,10 @@ export const useLikes = (fallbackData = undefined) => {
 
           mutate();
         } else {
-          const { error } = await fromLikes().insert(
-            {
-              event_id: eventId,
-              profile_id: user.id,
-            },
-            { returning: "minimal" }
-          );
+          const { error } = await fromLikes().insert({
+            event_id: eventId,
+            profile_id: user.id,
+          });
 
           if (error) {
             toast.error(t("toast.likeFailed"));

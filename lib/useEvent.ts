@@ -4,7 +4,7 @@ import { eventWithLocation } from "../types/supabaseManualEnhanced";
 import { fromEvents } from "../utils/supabaseClient";
 
 export const eventFetcher = async (id: string) => {
-  const { data, error } = await fromEvents<eventWithLocation>()
+  const { data, error } = await fromEvents()
     .select("*, location(id,name)")
     .match({ id })
     .single();
@@ -26,9 +26,13 @@ export const useEvent = (
     error,
     mutate,
     isValidating,
-  } = useSWR<Nullable<eventWithLocation>>([id, "event_list"], eventFetcher, {
-    fallbackData,
-  });
+  } = useSWR<Nullable<eventWithLocation>>(
+    [id, "event_list"],
+    () => eventFetcher(id),
+    {
+      fallbackData,
+    }
+  );
 
   return { event, isValidating, mutate, error };
 };

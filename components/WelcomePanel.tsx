@@ -89,7 +89,7 @@ export function WelcomePanel({ latest5fromServer, top5ThisWeekServer }) {
             <p>{t("welcomePanel.description[0]")}</p>
             <p>{t("welcomePanel.description[1]")}</p>
 
-            <Link href="/about" passHref>
+            <Link href="/about" passHref legacyBehavior>
               <HyperLink>{t("welcomePanel.readMore")}</HyperLink>
             </Link>
           </TypoText>

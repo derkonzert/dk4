@@ -34,7 +34,7 @@ interface CreateEventUpdateFormOwnProps {
 export function CreateEventUpdateForm({
   event,
   onChangesSubmitted,
-}: CreateEventUpdateFormOwnProps): JSX.Element {
+}: CreateEventUpdateFormOwnProps): React.JSX.Element {
   const { t, formatDateLocalized } = useTranslation();
   const { locationByName } = useLocations();
 
@@ -136,7 +136,7 @@ export function CreateEventUpdateForm({
         {}
       );
 
-      const { data, error } = await fromEventUpdates().insert({
+      const { error } = await fromEventUpdates().insert({
         event_id: event.id,
         summary,
         changes,

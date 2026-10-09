@@ -33,7 +33,7 @@ export const EventDialog = ({ id, onDeleted, onError }) => {
   const [parentEvent, setParentEvent] = useState<Nullable<parentEvent>>(null);
 
   const fetchEvent = useCallback(async () => {
-    const { data: event, error } = await fromEvents<eventWithChildEvents>()
+    const { data: event, error } = await fromEvents()
       .select("*, childEvents:events!parent_event(id,title,fromDate,toDate)")
       .match({ id })
       .single();
@@ -52,7 +52,7 @@ export const EventDialog = ({ id, onDeleted, onError }) => {
     }
 
     if (event.parent_event) {
-      const { data: parentEvent } = await fromEvents<parentEvent>()
+      const { data: parentEvent } = await fromEvents()
         .select("id,title")
         .match({ id: event.parent_event })
         .single();
@@ -106,12 +106,10 @@ export const EventDialog = ({ id, onDeleted, onError }) => {
                 </HyperLink>
               </LinkToEventDialog>
             )}
-            <DialogTitle
-              size="h1"
-              as={TypoHeading}
-              data-test-id="event-dialog-title"
-            >
-              {event.title}
+            <DialogTitle asChild>
+              <TypoHeading size="h1" data-test-id="event-dialog-title">
+                {event.title}
+              </TypoHeading>
             </DialogTitle>
             {Nullable.isSome(event) && (
               <EventDetailData

@@ -1,5 +1,4 @@
-import { User } from "@supabase/gotrue-js";
-import { SupabaseAuthClient } from "@supabase/supabase-js/dist/main/lib/SupabaseAuthClient";
+import { Session, User } from "@supabase/supabase-js";
 import {
   createContext,
   useCallback,
@@ -13,7 +12,7 @@ import { supabase } from "../utils/supabaseClient";
 
 interface UserContext {
   user: Nullable<{ id; email }>;
-  session: Nullable<SupabaseAuthClient["session"]>;
+  session: Nullable<Session>;
   roles: UserRole[];
   hasRole: (role: UserRole) => boolean;
 }
@@ -29,15 +28,12 @@ type UserRole = definitions["user_roles"]["role"];
 
 export const UserContextProvider = (props) => {
   const { supabaseClient } = props;
-  const [session, setSession] =
-    useState<Nullable<SupabaseAuthClient["session"]>>(null);
+  const [session, setSession] = useState<Nullable<Session>>(null);
   const [user, setUser] = useState<Nullable<User>>(null);
   const [roles, setRoles] = useState<UserRole[]>([]);
 
   const fetchUserRoles = useCallback(async () => {
-    const { data } = await supabase
-      .from<definitions["user_roles"]>("user_roles")
-      .select("role");
+    const { data } = await supabase.from("user_roles").select("role");
 
     if (data) {
       setRoles(data.map(({ role }) => role));
@@ -55,18 +51,19 @@ export const UserContextProvider = (props) => {
   );
 
   useEffect(() => {
-    const session = supabaseClient.auth.session();
-    setSession(session);
-    setUser(session?.user ?? null);
+    supabaseClient.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
     const { data: authListener } = supabaseClient.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
       }
     );
 
     return () => {
-      authListener.unsubscribe();
+      authListener.subscription.unsubscribe();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

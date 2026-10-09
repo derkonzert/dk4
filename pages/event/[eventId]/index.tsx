@@ -40,7 +40,7 @@ export const getStaticProps = async ({ params }) => {
       };
     }
 
-    const { data: event } = await fromEvents<{ legacyId: string; id: string }>()
+    const { data: event } = await fromEvents()
       .select(`id`)
       .eq("legacyId", legacyId)
       .single();
@@ -61,7 +61,7 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const { data: event } = await fromEvents<eventDetailData>()
+  const { data: event } = await fromEvents()
     .select(`*`)
     .eq("id", params.eventId)
     .single();
@@ -72,7 +72,7 @@ export const getStaticProps = async ({ params }) => {
     };
   }
 
-  const { data: childEvents } = await fromEvents<eventDetailData>()
+  const { data: childEvents } = await fromEvents()
     .select("*")
     .eq("parent_event", params.eventId);
 

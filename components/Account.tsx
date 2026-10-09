@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import { Nullable } from "typescript-nullable";
 import { useTranslation } from "../lib/TranslationContextProvider";
 import { useUser } from "../lib/UserContextProvider";
-import { definitions } from "../types/supabase";
 import { supabase } from "../utils/supabaseClient";
 import AvatarUpload from "./AvatarUpload";
 import { Box } from "./Box";
@@ -55,17 +54,7 @@ export default function Account({ session }) {
         setLoading(true);
 
         let { data, error, status } = await supabase
-          .from<
-            Pick<
-              definitions["profiles"],
-              | "id"
-              | "username"
-              | "avatar_url"
-              | "immediate_updates"
-              | "weekly_updates"
-              | "calendarToken"
-            >
-          >("profiles")
+          .from("profiles")
           .select(
             `id, username, avatar_url, immediate_updates, weekly_updates, calendarToken`
           )
@@ -98,7 +87,9 @@ export default function Account({ session }) {
       async function updateProfile(accountData: Partial<AccountFormData>) {
         try {
           setLoading(true);
-          const user = supabase.auth.user();
+          const {
+            data: { user },
+          } = await supabase.auth.getUser();
 
           const updates = {
             ...accountData,
@@ -107,10 +98,8 @@ export default function Account({ session }) {
           };
 
           let { error } = await supabase
-            .from<AccountFormData>("profiles")
-            .update(updates, {
-              returning: "minimal", // Don't return the value after inserting
-            })
+            .from("profiles")
+            .update(updates)
             .eq("id", user?.id);
 
           if (error) {
@@ -238,7 +227,7 @@ export default function Account({ session }) {
                 {t("profileForm.section.security")}
               </TypoHeading>
               <Box>
-                <Link href="/account/update-password" passHref>
+                <Link href="/account/update-password" passHref legacyBehavior>
                   <Button as="a" variant="secondary">
                     {t("profileForm.updatePassword")}
                   </Button>

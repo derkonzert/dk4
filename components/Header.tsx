@@ -251,15 +251,11 @@ export default function Header({ secondRow = "none" }: HeaderOwnProps) {
       };
 
       if (data.avatar_url) {
-        const { data: file, error } = await supabase.storage
+        const { data: file } = supabase.storage
           .from("avatars")
           .getPublicUrl(data.avatar_url);
 
-        if (error) {
-          throw error;
-        }
-
-        profile.avatar_url = file?.publicURL;
+        profile.avatar_url = file.publicUrl;
       }
 
       setProfile(profile);
@@ -276,7 +272,7 @@ export default function Header({ secondRow = "none" }: HeaderOwnProps) {
   return (
     <HeaderWrapper ref={headerRef} noSecondRow={secondRow === "none"}>
       <HeaderWrapperRow size="large">
-        <Link href="/" passHref>
+        <Link href="/" passHref legacyBehavior>
           <HeaderMainLink css={{ marginRight: "auto" }}>
             {t("header.title")}
             <Box
@@ -327,7 +323,7 @@ export default function Header({ secondRow = "none" }: HeaderOwnProps) {
         </Popover>
         <HamburgerMenu />
         {!!user && (
-          <Link href="/account/profile" passHref>
+          <Link href="/account/profile" passHref legacyBehavior>
             <Button
               as="a"
               variant="icon"

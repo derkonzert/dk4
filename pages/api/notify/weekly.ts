@@ -10,7 +10,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Nullable } from "typescript-nullable";
 import { sendMail } from "../../../email/sendMail";
 import { makeWeeklyEmail } from "../../../email/templates/weekly";
-import { definitions } from "../../../types/supabase";
 import { logtail } from "../../../utils/logtailServer";
 import { supabaseServiceClient } from "../../../utils/supabaseServiceClient";
 
@@ -32,7 +31,7 @@ export default async function notifyWeekly(
   const emailIdentifierKey = `weekly-${format(now, "yyyy-MM-dd")}`;
 
   const { data: emailExists } = await supabaseServiceClient
-    .from<definitions["emails"]>("emails")
+    .from("emails")
     .select("id")
     .match({ key: emailIdentifierKey })
     .single();
@@ -42,7 +41,7 @@ export default async function notifyWeekly(
   }
 
   const { data: eventsThisWeek, error } = await supabaseServiceClient
-    .from<definitions["events"]>("events")
+    .from("events")
     .select("*")
     .filter("canceled", "not.eq", true)
     .filter("fromDate", "gte", startDate.toISOString())
@@ -50,13 +49,16 @@ export default async function notifyWeekly(
     .order("fromDate", { ascending: true });
 
   if (error) {
-    logtail.error("Events this week not fetchable", error);
+    logtail.error("Events this week not fetchable", {
+      code: error.code,
+      message: error.message,
+    });
 
     return res.status(500).end();
   }
   const { data: recentlyAdded, error: recentlyAddedError } =
     await supabaseServiceClient
-      .from<definitions["events"]>("events")
+      .from("events")
       .select("*")
       // Filter out events happening this week as they already are shown in "this week"s section
       .filter(
@@ -70,7 +72,10 @@ export default async function notifyWeekly(
       .order("fromDate", { ascending: true });
 
   if (recentlyAddedError) {
-    logtail.error("Message", recentlyAddedError);
+    logtail.error("Message", {
+      code: recentlyAddedError.code,
+      message: recentlyAddedError.message,
+    });
 
     return res.status(500).end();
   }
@@ -95,7 +100,7 @@ export default async function notifyWeekly(
     }
 
     const { data: profiles } = await supabaseServiceClient
-      .from<definitions["profiles"]>("profiles")
+      .from("profiles")
       .select("id,email")
       .match({ weekly_updates: true });
 
@@ -110,10 +115,11 @@ export default async function notifyWeekly(
 
   try {
     const { data: createdEmail } = await supabaseServiceClient
-      .from<definitions["emails"]>("emails")
+      .from("emails")
       .insert({
         key: emailIdentifierKey,
       })
+      .select("id")
       .single();
 
     return res.status(200).end(createdEmail?.id.toString());

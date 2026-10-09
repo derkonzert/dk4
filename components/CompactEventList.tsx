@@ -1,5 +1,5 @@
 import { styled } from "../stitches.config";
-import { LikeButton } from "./LikeButton";
+import { LikeButtonStyled } from "./LikeButton";
 
 export const CompactEventList = styled("nav", {
   display: "flex",
@@ -49,7 +49,7 @@ export const CompactEventListItem = styled("a", {
     marginTop: "1px",
   },
 
-  [`& ${LikeButton}`]: {
+  [`& ${LikeButtonStyled}`]: {
     marginLeft: "auto",
   },
 

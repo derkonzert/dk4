@@ -3,6 +3,7 @@
 # generated sitemaps
 public/robots.txt
 public/sitemap.xml
+public/sitemap-*.xml
 
 # dependencies
 /node_modules

@@ -15,16 +15,9 @@ export default function AvatarUpload({ url, size, onUpload }) {
 
   async function downloadImage(path) {
     try {
-      const { data, error } = await supabase.storage
-        .from("avatars")
-        .getPublicUrl(path);
-      if (error) {
-        throw error;
-      }
+      const { data } = supabase.storage.from("avatars").getPublicUrl(path);
 
-      if (data) {
-        setAvatarUrl(data.publicURL);
-      }
+      setAvatarUrl(data.publicUrl);
     } catch (error) {
       console.log("Error downloading image: ", error.message);
     }

@@ -13,20 +13,18 @@ import { Maybe } from "../types/maybe";
 import { supabase } from "../utils/supabaseClient";
 
 export const getStaticProps = async ({ params }) => {
-  const { data: eventData, error } = await supabase.rpc<{
-    events_per_year: number;
-    from_year: string;
-  }>("archive_event_stats", {});
+  const { data: eventData } = await supabase.rpc("archive_event_stats", {});
+  const yearStats: Maybe<{ events_per_year: number; from_year: string }[]> =
+    eventData;
 
-  const eventStats = eventData
-    ? eventData.map((year) => [parseInt(year.from_year), year.events_per_year])
+  const eventStats = yearStats
+    ? yearStats.map((year) => [parseInt(year.from_year), year.events_per_year])
     : [];
 
-  const { data: locationData, error: lError } = await supabase.rpc<
-    Maybe<{ location_count: number }>
-  >("location_stats", {});
+  const { data: locationData } = await supabase.rpc("location_stats", {});
+  const locationStats: Maybe<{ location_count: number }[]> = locationData;
 
-  const locationCount = locationData?.[0]?.location_count ?? 0;
+  const locationCount = locationStats?.[0]?.location_count ?? 0;
 
   return { props: { eventStats, locationCount }, revalidate: 1 };
 };

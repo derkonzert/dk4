@@ -194,6 +194,7 @@ export function Events({
                     as={`/event/${evt.id}`}
                     passHref
                     shallow
+                    legacyBehavior
                   >
                     <EventListItemLink
                       data-test-id="event-list-item"

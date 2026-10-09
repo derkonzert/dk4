@@ -3,7 +3,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { supabaseServiceClient } from "../../utils/supabaseServiceClient";
 
-export function isEndToEndEventTitle(title: string | string[]) {
+export function isEndToEndEventTitle(
+  title: string | string[] | undefined
+): title is string | string[] {
   if (!title) {
     return false;
   }
@@ -26,7 +28,7 @@ export default async function handler(
 
   const { error } = await supabaseServiceClient
     .from("events")
-    .delete({ returning: "minimal" })
+    .delete()
     .match({ title });
 
   if (error) {

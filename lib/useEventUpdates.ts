@@ -4,7 +4,7 @@ import { eventUpdateWithData } from "../types/supabaseManualEnhanced";
 import { fromEventUpdates } from "../utils/supabaseClient";
 
 export const eventsFetcher = async (id) => {
-  const { data, error } = await fromEventUpdates<eventUpdateWithData>()
+  const { data, error } = await fromEventUpdates()
     .select("*")
     .match({ event_id: id });
 
@@ -26,7 +26,7 @@ export const useEventUpdates = (
     isValidating,
   } = useSWR<Nullable<eventUpdateWithData[]>>(
     [eventId, "eventUpdates"],
-    eventsFetcher,
+    () => eventsFetcher(eventId),
     {
       fallbackData,
     }

@@ -22,12 +22,15 @@ const StyledOverlay = styled(AlertDialogPrimitive.Overlay, {
   },
 });
 
-function Root({ children, ...props }) {
+function Portal({
+  children,
+  ...props
+}: AlertDialogPrimitive.AlertDialogPortalProps) {
   return (
-    <AlertDialogPrimitive.Root {...props}>
+    <AlertDialogPrimitive.Portal {...props}>
       <StyledOverlay />
       {children}
-    </AlertDialogPrimitive.Root>
+    </AlertDialogPrimitive.Portal>
   );
 }
 
@@ -68,10 +71,10 @@ const StyledDescription = styled(AlertDialogPrimitive.Description, {
 });
 
 // Exports
-export const AlertDialog = Root;
+export const AlertDialog = AlertDialogPrimitive.Root;
 export const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 export const AlertDialogContent = StyledContent;
-export const AlertDialogPortal = AlertDialogPrimitive.Portal;
+export const AlertDialogPortal = Portal;
 export const AlertDialogTitle = StyledTitle;
 export const AlertDialogDescription = StyledDescription;
 export const AlertDialogAction = AlertDialogPrimitive.Action;
