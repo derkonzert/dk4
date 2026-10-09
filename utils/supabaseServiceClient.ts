@@ -6,5 +6,6 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
 export const supabaseServiceClient = createClient(
   Nullable.withDefault("", supabaseUrl),
-  Nullable.withDefault("", supabaseServiceKey)
+  Nullable.withDefault("", supabaseServiceKey),
+  { auth: { persistSession: false, autoRefreshToken: false } }
 );

@@ -15,9 +15,10 @@ export function EventDeleteLink({ id, onDeleted }: EventDeleteOwnProps) {
   const { t } = useTranslation();
 
   const deleteEvent = useCallback(async () => {
-    const { error, data } = await fromEvents()
-      .delete({})
+    const { error } = await fromEvents()
+      .delete()
       .match({ id })
+      .select("id")
       .single();
 
     if (error) {

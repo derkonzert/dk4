@@ -72,14 +72,9 @@ export function CreateFeedbackForm({
   }, [onDirtyForm, isDirty]);
 
   const onSubmit = async (formData) => {
-    const { error } = await fromFeedback().insert(
-      {
-        ...formData,
-      },
-      {
-        returning: "minimal",
-      }
-    );
+    const { error } = await fromFeedback().insert({
+      ...formData,
+    });
 
     if (!error) {
       onFeedbackCreated?.();

@@ -32,7 +32,7 @@ const Index = () => {
     );
 
     return () => {
-      authListener?.unsubscribe();
+      authListener.subscription.unsubscribe();
     };
   }, [router]);
 

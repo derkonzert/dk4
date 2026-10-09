@@ -136,7 +136,7 @@ export function CreateEventUpdateForm({
         {}
       );
 
-      const { data, error } = await fromEventUpdates().insert({
+      const { error } = await fromEventUpdates().insert({
         event_id: event.id,
         summary,
         changes,

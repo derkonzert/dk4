@@ -1,4 +1,3 @@
-import { PostgrestFilterBuilder } from "@supabase/postgrest-js";
 import useSWR from "swr";
 import { Nullable } from "typescript-nullable";
 import { definitions } from "../types/supabase";
@@ -11,15 +10,10 @@ import {
 
 export type fetchedEvent = definitions["event_list"] & { id: string };
 
-function switchByFilter<T = fetchedEvent>(
-  filter: eventFilter,
-  limit,
-  year,
-  locationId
-): PostgrestFilterBuilder<T> {
+function switchByFilter(filter: eventFilter, limit, year, locationId) {
   switch (filter) {
     case "upcoming":
-      const apiCall = fromUpcomingEvents<T>("*");
+      const apiCall = fromUpcomingEvents("*");
 
       if (locationId) {
         return apiCall.match({ location: locationId });
@@ -27,9 +21,9 @@ function switchByFilter<T = fetchedEvent>(
         return apiCall;
       }
     case "latest":
-      return fromLatestEvents<T>("*", limit);
+      return fromLatestEvents("*", limit);
     case "archived":
-      return fromArchiveEvents<T>("*", year);
+      return fromArchiveEvents("*", year);
     default:
       throw new Error(`Filter "${filter}" is not implemented yet.`);
   }
@@ -41,12 +35,7 @@ export async function eventsFetcher<T>(
   year?: string,
   locationId?: string
 ) {
-  const { data, error } = await switchByFilter<T>(
-    filter,
-    limit,
-    year,
-    locationId
-  );
+  const { data, error } = await switchByFilter(filter, limit, year, locationId);
 
   if (error) {
     throw error;
@@ -88,7 +77,7 @@ export const useEvents = (
 type Top5ThisWeek = definitions["top_liked_week"] & { id: string };
 
 export async function top5fetcher(limit) {
-  const { data, error } = await fromTopThisWeekEvents<Top5ThisWeek>("*", limit);
+  const { data, error } = await fromTopThisWeekEvents("*", limit);
 
   if (error) {
     throw error;

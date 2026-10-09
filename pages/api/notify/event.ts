@@ -2,7 +2,6 @@ import { startOfDay, sub } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 import { sendMail } from "../../../email/sendMail";
 import { makeEventEmail } from "../../../email/templates/new-event";
-import { definitions } from "../../../types/supabase";
 import { logtail } from "../../../utils/logtailServer";
 import { supabaseServiceClient } from "../../../utils/supabaseServiceClient";
 import { isEndToEndEventTitle } from "../e2e-reset";
@@ -25,7 +24,7 @@ export default async function notifyEvent(
   const emailIdentifierKey = `event-${eventId}`;
 
   const { data: emailExists } = await supabaseServiceClient
-    .from<definitions["emails"]>("emails")
+    .from("emails")
     .select("id")
     .match({ key: emailIdentifierKey })
     .single();
@@ -36,7 +35,7 @@ export default async function notifyEvent(
   }
 
   const { data: event } = await supabaseServiceClient
-    .from<definitions["events"]>("events")
+    .from("events")
     .select("*")
     .match({ id: eventId })
     .single();
@@ -67,7 +66,7 @@ export default async function notifyEvent(
   }
 
   const { data: profiles } = await supabaseServiceClient
-    .from<definitions["profiles"]>("profiles")
+    .from("profiles")
     .select("id,email")
     .match({ immediate_updates: true });
 
@@ -81,10 +80,11 @@ export default async function notifyEvent(
 
   try {
     const { data: createdEmail } = await supabaseServiceClient
-      .from<definitions["emails"]>("emails")
+      .from("emails")
       .insert({
         key: emailIdentifierKey,
       })
+      .select("id")
       .single();
 
     logtail.log(`Done - All good`);

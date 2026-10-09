@@ -16,7 +16,7 @@ export async function getStaticPaths(context) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const { data: location } = await fromLocations<locationDetails>()
+  const { data: location } = await fromLocations()
     .select(`*`)
     .eq("id", params.locationId)
     .single();

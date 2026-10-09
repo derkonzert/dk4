@@ -209,6 +209,7 @@ export function CreateEventForm({
           location: existingLocation.id,
           author: user?.id ?? null,
         })
+        .select("id")
         .single();
 
       if (error) {
@@ -224,10 +225,7 @@ export function CreateEventForm({
             location: Nullable.maybe("", ({ id }) => id, existingLocation),
             author: user?.id ?? null,
             parent_event: newEvent?.id,
-          })),
-          {
-            returning: "minimal",
-          }
+          }))
         );
 
         if (error) {

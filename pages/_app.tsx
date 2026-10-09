@@ -98,7 +98,7 @@ function MyApp({ Component, pageProps }) {
     );
 
     return () => {
-      authListener?.unsubscribe();
+      authListener.subscription.unsubscribe();
     };
   }, [router]);
 

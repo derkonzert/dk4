@@ -28,7 +28,7 @@ export default async function handler(
 
   const { error } = await supabaseServiceClient
     .from("events")
-    .delete({ returning: "minimal" })
+    .delete()
     .match({ title });
 
   if (error) {

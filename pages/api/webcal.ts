@@ -78,7 +78,7 @@ export default async function webcal(
   }
 
   const { data: associatedProfile } = await supabaseServiceClient
-    .from<Pick<definitions["profiles"], "id">>("profiles")
+    .from("profiles")
     .select("id")
     .match({ calendarToken: token })
     .single();

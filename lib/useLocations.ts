@@ -8,9 +8,7 @@ import { fromLocations } from "../utils/supabaseClient";
 type fetchedLocation = Pick<definitions["locations"], "id" | "name">;
 
 const locationsFetcher = async () => {
-  const { data, error } = await fromLocations<fetchedLocation>()
-    .select("id,name")
-    .order("name");
+  const { data, error } = await fromLocations().select("id,name").order("name");
 
   if (error) {
     throw error;
@@ -37,10 +35,11 @@ export function useLocations(fallbackData = undefined): UseLocationsResult {
   });
 
   const addNewLocation = useCallback(async (locationName) => {
-    const { data, error } = await fromLocations<fetchedLocation>()
+    const { data, error } = await fromLocations()
       .insert({
         name: locationName.trim(),
       })
+      .select("id,name")
       .single();
 
     if (data) {
@@ -49,7 +48,7 @@ export function useLocations(fallbackData = undefined): UseLocationsResult {
 
     if (error) {
       // The location might already exist, try fetching it instead
-      const alreadyExistingLocation = await fromLocations<fetchedLocation>()
+      const alreadyExistingLocation = await fromLocations()
         .select("id,name")
         .match({
           name: locationName.trim(),

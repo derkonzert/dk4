@@ -33,7 +33,7 @@ export async function getStaticPaths(context) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const { data: event } = await fromEvents<definitions["events"]>()
+  const { data: event } = await fromEvents()
     .select(`*`)
     .eq("id", params.eventId)
     .single();

@@ -46,12 +46,11 @@ function Auth(props: AuthProps) {
     setError("");
     setLoading(true);
 
-    const { error: signInError } = await supabaseClient.auth.signIn(
+    const { error: signInError } = await supabaseClient.auth.signInWithPassword(
       {
         email,
         password,
-      },
-      { redirectTo: document.location.origin }
+      }
     );
     if (signInError) setError(signInError.message);
 
@@ -61,12 +60,10 @@ function Auth(props: AuthProps) {
     setError("");
     setLoading(true);
 
-    const { error: signInError } = await supabaseClient.auth.signIn(
-      {
-        provider: "google",
-      },
-      { redirectTo: document.location.origin }
-    );
+    const { error: signInError } = await supabaseClient.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: document.location.origin },
+    });
     if (signInError) setError(signInError.message);
 
     setLoading(false);
@@ -77,13 +74,11 @@ function Auth(props: AuthProps) {
     setError("");
     setLoading(true);
 
-    const { error: signUpError } = await supabaseClient.auth.signUp(
-      {
-        email,
-        password,
-      },
-      { redirectTo: document.location.origin }
-    );
+    const { error: signUpError } = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: document.location.origin },
+    });
     if (signUpError) setError(signUpError.message);
 
     setLoading(false);
@@ -94,12 +89,10 @@ function Auth(props: AuthProps) {
     setError("");
     setLoading(true);
 
-    const { error: signUpError } = await supabaseClient.auth.signIn(
-      {
-        provider: "google",
-      },
-      { redirectTo: document.location.origin }
-    );
+    const { error: signUpError } = await supabaseClient.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: document.location.origin },
+    });
     if (signUpError) setError(signUpError.message);
 
     setLoading(false);
@@ -110,10 +103,9 @@ function Auth(props: AuthProps) {
     setError("");
     setMessage("");
     setLoading(true);
-    const { error } = await supabaseClient.auth.api.resetPasswordForEmail(
-      email,
-      { redirectTo: document.location.origin }
-    );
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+      redirectTo: document.location.origin,
+    });
     if (error) setError(error.message);
     else setMessage("Check your email for the password reset link");
     setLoading(false);
@@ -124,10 +116,10 @@ function Auth(props: AuthProps) {
     setError("");
     setMessage("");
     setLoading(true);
-    const { error } = await supabaseClient.auth.signIn(
-      { email },
-      { redirectTo: document.location.origin }
-    );
+    const { error } = await supabaseClient.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: document.location.origin },
+    });
     if (error) setError(error.message);
     else setMessage("Check your email for the magic link");
     setLoading(false);
@@ -329,7 +321,7 @@ function UpdatePassword({ supabaseClient }) {
     setError("");
     setMessage("");
     setLoading(true);
-    const { error } = await supabaseClient.auth.update({ password });
+    const { error } = await supabaseClient.auth.updateUser({ password });
     if (error) setError(error.message);
     else setMessage("Your password has been updated");
     setLoading(false);

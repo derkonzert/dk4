@@ -17,8 +17,9 @@ export function VerifyEventLinkLink({
 
   const verifyEvent = useCallback(async () => {
     const { error } = await fromEvents()
-      .update({ verified: true }, { returning: "minimal" })
+      .update({ verified: true })
       .match({ id })
+      .select("id")
       .single();
 
     if (error) {

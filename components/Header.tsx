@@ -251,15 +251,11 @@ export default function Header({ secondRow = "none" }: HeaderOwnProps) {
       };
 
       if (data.avatar_url) {
-        const { data: file, error } = await supabase.storage
+        const { data: file } = supabase.storage
           .from("avatars")
           .getPublicUrl(data.avatar_url);
 
-        if (error) {
-          throw error;
-        }
-
-        profile.avatar_url = file?.publicURL;
+        profile.avatar_url = file.publicUrl;
       }
 
       setProfile(profile);
