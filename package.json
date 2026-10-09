@@ -41,6 +41,7 @@
     "@supabase/supabase-js": "^2.117.3",
     "@touch4it/ical-timezones": "^1.9.0",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "clamp": "^1.0.1",
     "clipboardy": "^3.0.0",
     "date-fns": "^2.29.3",
