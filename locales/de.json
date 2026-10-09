@@ -71,6 +71,7 @@
   "event.delete.dialog.title": "Ganz sicher?",
   "event.delete.success": "Event erfolgreich gelöscht",
   "event.verify": "Event bestätigen",
+  "event.verify.search": "Event suchen",
   "event.verify.success": "Event erfolgreich bestätigt",
   "eventDetail.childEventsTitle": "Termine",
   "eventDetail.createUpdate.action": "Änderung vorschlagen",
