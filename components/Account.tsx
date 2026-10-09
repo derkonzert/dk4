@@ -227,7 +227,7 @@ export default function Account({ session }) {
                 {t("profileForm.section.security")}
               </TypoHeading>
               <Box>
-                <Link href="/account/update-password" passHref>
+                <Link href="/account/update-password" passHref legacyBehavior>
                   <Button as="a" variant="secondary">
                     {t("profileForm.updatePassword")}
                   </Button>

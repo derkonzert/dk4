@@ -1,9 +1,6 @@
 module.exports = {
   reactStrictMode: true,
 
-  // Terser in Next 12 cannot parse class static blocks used by newer Radix
-  swcMinify: true,
-
   // no next/image usage; disable the /_next/image optimizer endpoint
   images: {
     unoptimized: true,

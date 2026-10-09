@@ -153,14 +153,14 @@ export const HamburgerMenu = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent sideOffset={5}>
-        <Link href="/about" passHref>
+        <Link href="/about" passHref legacyBehavior>
           <DropdownMenuItem asChild>
             <a>About</a>
           </DropdownMenuItem>
         </Link>
 
         {!!user && (
-          <Link href="/account/profile" passHref>
+          <Link href="/account/profile" passHref legacyBehavior>
             <DropdownMenuItem asChild>
               <a>Profile</a>
             </DropdownMenuItem>
@@ -176,7 +176,7 @@ export const HamburgerMenu = () => {
             Log out
           </DropdownMenuItem>
         ) : (
-          <Link href="/account/sign-in" passHref>
+          <Link href="/account/sign-in" passHref legacyBehavior>
             <DropdownMenuItem asChild>
               <a>Login</a>
             </DropdownMenuItem>

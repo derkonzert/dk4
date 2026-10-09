@@ -16,7 +16,7 @@ export const makeEventPathProps = (id, currentFilter?: string | string[]) => {
 
 export function LinkToEventUpdate({ id, children }) {
   return (
-    <Link href={`/event/${id}/update`} passHref>
+    <Link href={`/event/${id}/update`} passHref legacyBehavior>
       {children}
     </Link>
   );
@@ -26,7 +26,12 @@ export function LinkToEventDialog({ id, children }) {
   const { query } = useRouter();
 
   return (
-    <Link {...makeEventPathProps(id, query.currentFilter)} passHref shallow>
+    <Link
+      {...makeEventPathProps(id, query.currentFilter)}
+      passHref
+      shallow
+      legacyBehavior
+    >
       {children}
     </Link>
   );

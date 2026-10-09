@@ -107,7 +107,7 @@ export const EventDetailData = ({
           {!!to &&
             " - " +
               formatDateLocalized(to, isSameDay(from, to) ? "p" : "PPp")}{" "}
-          <Link passHref href={`/location/${event.location}`}>
+          <Link passHref href={`/location/${event.location}`} legacyBehavior>
             <HyperLink type="ghost">
               {location && `@${location.name}`}
             </HyperLink>
@@ -226,6 +226,7 @@ export const EventDetailData = ({
                   as={`/event/${childEvent.id}`}
                   passHref
                   shallow
+                  legacyBehavior
                 >
                   <CompactEventListItem
                     isInPast={isInPast}

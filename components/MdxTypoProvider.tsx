@@ -23,7 +23,7 @@ const Li = styled(TypoText, {
 const A = ({ href, ...props }: StyledComponentProps<any>) => {
   if (href.startsWith("/")) {
     return (
-      <Link href={href} passHref>
+      <Link href={href} passHref legacyBehavior>
         <HyperLink {...props} />
       </Link>
     );

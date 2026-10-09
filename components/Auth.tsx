@@ -194,12 +194,16 @@ function Auth(props: AuthProps) {
                 </Flex>
               </form>
               <Flex direction="column" gap="1">
-                <Link href="/account/magic-link" passHref>
+                <Link href="/account/magic-link" passHref legacyBehavior>
                   <Button as="a" variant="ghost">
                     {t("auth.action.magicLink")}
                   </Button>
                 </Link>
-                <Link href="/account/forgotten-password" passHref>
+                <Link
+                  href="/account/forgotten-password"
+                  passHref
+                  legacyBehavior
+                >
                   <Button as="a" variant="ghost">
                     {t("auth.action.forgotPassword")}
                   </Button>
@@ -278,7 +282,7 @@ function Auth(props: AuthProps) {
           </form>
 
           <Flex direction="column" gap="1">
-            <Link href="/account/magic-link" passHref>
+            <Link href="/account/magic-link" passHref legacyBehavior>
               <AuthLink>{t("auth.action.magicLink")}</AuthLink>
             </Link>
           </Flex>

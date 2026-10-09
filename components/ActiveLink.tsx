@@ -26,7 +26,7 @@ const ActiveLink = ({
       query.currentFilter === currentFilterMatch);
 
   return (
-    <Link {...props}>
+    <Link {...props} legacyBehavior>
       {React.cloneElement(child, {
         active: isActive,
       })}

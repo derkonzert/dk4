@@ -18,7 +18,7 @@
     "isolatedModules": true,
     "strictNullChecks": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": false
   },
   "include": [
     "mdx.d.ts",

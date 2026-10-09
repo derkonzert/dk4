@@ -18,6 +18,8 @@ export async function getMarkdownContent(filePath) {
       rehypePlugins: [],
     },
     scope: data,
+    // Content is our own repo files and uses JSX props like css={{ ... }}
+    blockJS: false,
   });
 
   return {
